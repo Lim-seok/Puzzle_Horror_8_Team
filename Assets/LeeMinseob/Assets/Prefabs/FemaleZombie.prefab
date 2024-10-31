@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 8478564163678315990}
   - component: {fileID: 1176289521561357985}
   m_Layer: 0
-  m_Name: FemaleZombie Prefab
+  m_Name: FemaleZombie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
