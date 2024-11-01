@@ -13,11 +13,10 @@ public class LaserReceiver : MonoBehaviour
         PuzzleManager.Instance.AddPuzzleSwitch(cell);
     }
 
-
     private void Update()
     {
         timeSinceLastLaser += Time.deltaTime;
-        if(timeSinceLastLaser > laserTimeout && isClear)
+        if (timeSinceLastLaser > laserTimeout && isClear)
         {
             isClear = false;
             PuzzleManager.Instance.SetPuzzleSwitchState(cell.key, false);
