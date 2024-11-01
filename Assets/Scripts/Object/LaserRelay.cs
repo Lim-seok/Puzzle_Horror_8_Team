@@ -5,7 +5,7 @@ public class LaserRelay : MonoBehaviour
     public LineRenderer relayLaserRenderer;
     private bool isLit = false;
     private Vector3 lastIncomingDirection = Vector3.forward;
-    private float currentRotation = 90f;
+    private bool laserReceivedThisFrame = false;
 
     private void Start()
     {
@@ -14,15 +14,12 @@ public class LaserRelay : MonoBehaviour
 
     private void Update()
     {
-        if (CheckLaserHit())
-        {
-            RelayLaser();
-        }
-        else
+        if (!laserReceivedThisFrame)
         {
             isLit = false;
             relayLaserRenderer.enabled = false;
         }
+        laserReceivedThisFrame = false;
     }
 
     private bool CheckLaserHit()
@@ -42,31 +39,27 @@ public class LaserRelay : MonoBehaviour
         return false;
     }
 
-    public void RotateRelayDirection()
-    {
-        currentRotation += 90f;
-        if (currentRotation >= 360f) currentRotation = 0f;
-
-        if (CheckLaserHit())
-        {
-            RelayLaser();
-        }
-    }
-
     public void OnLaserHit(Vector3 incomingDirection)
     {
+        if (isLit) return;
+
         isLit = true;
         lastIncomingDirection = incomingDirection;
         relayLaserRenderer.enabled = true;
+        laserReceivedThisFrame = true;
         RelayLaser();
+    }
+
+    public void EnableRelayRenderer()
+    {
+        relayLaserRenderer.enabled = true;
     }
 
     private void RelayLaser()
     {
         if (!isLit) return;
 
-        Vector3 relayDirection = Quaternion.Euler(0, currentRotation, 0) * lastIncomingDirection;
-
+        Vector3 relayDirection = transform.forward;
         RaycastHit hit;
         Vector3 start = transform.position;
 
@@ -83,8 +76,9 @@ public class LaserRelay : MonoBehaviour
             else
             {
                 LaserRelay nextRelay = hit.collider.GetComponent<LaserRelay>();
-                if (nextRelay != null)
+                if (nextRelay != null && !nextRelay.isLit)
                 {
+                    nextRelay.EnableRelayRenderer();
                     nextRelay.OnLaserHit(relayDirection);
                 }
             }

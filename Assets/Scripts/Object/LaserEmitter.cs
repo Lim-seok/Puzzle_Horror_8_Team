@@ -24,6 +24,8 @@ public class LaserEmitter : MonoBehaviour
             LaserRelay relay = hit.collider.GetComponent<LaserRelay>();
             if (relay != null)
             {
+                // relay의 LineRenderer를 활성화
+                relay.EnableRelayRenderer();
                 relay.OnLaserHit(direction);
             }
         }
