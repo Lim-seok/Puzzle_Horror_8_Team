@@ -1,0 +1,14 @@
+using UnityEngine;
+
+public class LightReceiver : MonoBehaviour
+{
+    public void OnLaserReceived()
+    {
+        CompleteQuest();
+    }
+
+    private void CompleteQuest()
+    {
+        Debug.Log("Äù½ºÆ® ¿Ï·á!");
+    }
+}
