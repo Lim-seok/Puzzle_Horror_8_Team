@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
 
 public enum AIState
 {
@@ -18,7 +17,7 @@ public class CreatureBase : MonoBehaviour
     public float runSpeed;
 
     [Header("AI")]
-    private AIState aiState;
+    protected AIState aiState;
     public float detectDistance;
     public float safeDistance;
 
@@ -31,23 +30,20 @@ public class CreatureBase : MonoBehaviour
     [Header("Combat")]
     public int damage;
     public float attackRate;
-    private float lastAttackTime;
+    protected float lastAttackTime;
     public float attackDistance;
 
-    private float playerDistance;
+    protected float playerDistance;
 
     public float fieldOfView = 120f;
 
-    private NavMeshAgent agent;
-    private Animator animator;
-    private SkinnedMeshRenderer[] meshRenderers;
+    protected Animator animator;
 
-    private void Awake()
+    protected virtual void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
-        meshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
 
+        // CreatureManager¿¡ µî·Ï
         CreatureManager.Instance.RegisterCreature(this);
     }
 
@@ -56,10 +52,8 @@ public class CreatureBase : MonoBehaviour
         CreatureManager.Instance.UnregisterCreature(this);
     }
 
-    public void UpdateAI()
+    public virtual void UpdateAI()
     {
-        playerDistance = Vector3.Distance(transform.position, TemporaryCharacterManager.Instance.Player.transform.position);
-
         animator.SetBool("Moving", aiState != AIState.Idle);
 
         switch (aiState)
@@ -79,154 +73,27 @@ public class CreatureBase : MonoBehaviour
         }
     }
 
-    private void SetState(AIState state)
+    protected virtual void SetState(AIState state)
     {
         aiState = state;
-
-        switch (aiState)
-        {
-            case AIState.Idle:
-                agent.speed = walkSpeed;
-                agent.isStopped = true;
-                break;
-            case AIState.Wandering:
-                agent.speed = walkSpeed;
-                agent.isStopped = false;
-                break;
-            case AIState.Attacking:
-                agent.speed = runSpeed;
-                agent.isStopped = false;
-                break;
-            case AIState.Fleeing:
-                agent.speed = runSpeed;
-                agent.isStopped = false;
-                break;
-        }
-
-        animator.speed = agent.speed / walkSpeed;
     }
 
-    void PassiveUpdate()
+    protected virtual void PassiveUpdate()
     {
-        if (aiState == AIState.Wandering && agent.remainingDistance < 0.1f)
-        {
-            SetState(AIState.Idle);
-            Invoke("WanderToNewLocation", Random.Range(minWanderWaitTime, maxWanderWaitTime));
-        }
-
         if (playerDistance < detectDistance)
         {
             SetState(AIState.Attacking);
         }
     }
 
-    void AttackingUpdate()
-    {
-        if (playerDistance > attackDistance || !IsPlayerInFieldOfView())
-        {
-            agent.isStopped = false;
-            NavMeshPath path = new NavMeshPath();
-            if (agent.CalculatePath(TemporaryCharacterManager.Instance.Player.transform.position, path))
-            {
-                agent.SetDestination(TemporaryCharacterManager.Instance.Player.transform.position);
-            }
-            else
-            {
-                SetState(AIState.Fleeing);
-            }
-        }
-        else
-        {
-            agent.isStopped = true;
-            if (Time.time - lastAttackTime > attackRate)
-            {
-                lastAttackTime = Time.time;
-                animator.speed = 1;
-                animator.SetTrigger("Attack");
-            }
-        }
-    }
+    protected virtual void AttackingUpdate() { }
 
-    void FleeingUpdate()
-    {
-        if (agent.remainingDistance < 0.1f)
-        {
-            agent.SetDestination(GetFleeLocation());
-        }
-        else
-        {
-            SetState(AIState.Wandering);
-        }
-    }
+    protected virtual void FleeingUpdate() { }
 
-    void WanderToNewLocation()
+    protected virtual bool IsPlayerInFieldOfView()
     {
-        if (aiState != AIState.Idle)
-        {
-            return;
-        }
-        SetState(AIState.Wandering);
-        agent.SetDestination(GetWanderLocation());
-    }
-
-    bool IsPlayerInFieldOfView()
-    {
-        Vector3 directionToPlayer = TemporaryCharacterManager.Instance.Player.transform.position - transform.position;
+        Vector3 directionToPlayer = CharacterManager.Instance.Player.transform.position - transform.position;
         float angle = Vector3.Angle(transform.forward, directionToPlayer);
         return angle < fieldOfView * 0.5f;
-    }
-
-    Vector3 GetFleeLocation()
-    {
-        NavMeshHit hit;
-
-        NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * safeDistance), out hit, maxWanderDistance, NavMesh.AllAreas);
-
-        int i = 0;
-        while (GetDestinationAngle(hit.position) > 90 || playerDistance < safeDistance)
-        {
-            NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * safeDistance), out hit, maxWanderDistance, NavMesh.AllAreas);
-            i++;
-            if (i == 30)
-                break;
-        }
-
-        return hit.position;
-    }
-
-    Vector3 GetWanderLocation()
-    {
-        NavMeshHit hit;
-
-        NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * Random.Range(minWanderDistance, maxWanderDistance)), out hit, maxWanderDistance, NavMesh.AllAreas);
-
-        int i = 0;
-        while (Vector3.Distance(transform.position, hit.position) < detectDistance)
-        {
-            NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * Random.Range(minWanderDistance, maxWanderDistance)), out hit, maxWanderDistance, NavMesh.AllAreas);
-            i++;
-            if (i == 30)
-                break;
-        }
-
-        return hit.position;
-    }
-
-    float GetDestinationAngle(Vector3 targetPos)
-    {
-        return Vector3.Angle(transform.position - TemporaryCharacterManager.Instance.Player.transform.position, transform.position + targetPos);
-    }
-
-
-
-    IEnumerator DamageFlash()
-    {
-        foreach (var renderer in meshRenderers)
-            renderer.material.color = new Color(1.0f, 0.6f, 0.6f);
-
-        yield return new WaitForSeconds(0.1f);
-
-        foreach (var renderer in meshRenderers)
-            renderer.material.color = Color.white;
     }
 }
