@@ -4,19 +4,13 @@ using UnityEngine;
 public class LightRelay : MonoBehaviour
 {
     public LineRenderer relayLaserRenderer;
-    public Color relayLaserColor = Color.green;
-    public float relayLaserWidth = 0.1f;
     private bool isLit = false;
     private Vector3 lastIncomingDirection;
     private float currentRotation = 90f;
 
     private void Start()
     {
-        relayLaserRenderer.startColor = relayLaserColor;
-        relayLaserRenderer.endColor = relayLaserColor;
-        relayLaserRenderer.startWidth = relayLaserWidth;
-        relayLaserRenderer.endWidth = relayLaserWidth;
-        relayLaserRenderer.enabled = false; // 시작 시 비활성화
+        relayLaserRenderer.enabled = false;
     }
 
     private void Update()

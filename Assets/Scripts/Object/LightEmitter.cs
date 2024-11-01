@@ -4,15 +4,10 @@ public class LightEmitter : MonoBehaviour
 {
     public LineRenderer laserRenderer;
     public float maxLaserDistance = 10f;
-    public Color laserColor = Color.red;
-    public float laserWidth = 0.1f;
 
     private void Start()
     {
-        laserRenderer.startColor = laserColor;
-        laserRenderer.endColor = laserColor;
-        laserRenderer.startWidth = laserWidth;
-        laserRenderer.endWidth = laserWidth;
+
     }
 
     private void Update()
