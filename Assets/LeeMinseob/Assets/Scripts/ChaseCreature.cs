@@ -15,12 +15,16 @@ public class ChaseCreature : CreatureBase
     {
         if (CharacterManager.Instance == null || CharacterManager.Instance.Player == null)
         {
-            Debug.LogError("CharacterManager or Player is not initialized.");
             return;
         }
 
         playerDistance = Vector3.Distance(transform.position, CharacterManager.Instance.Player.transform.position);
         base.UpdateAI();
+
+        if (aiState == AIState.Chasing)
+        {
+            ChasingUpdate();
+        }
     }
 
     protected override void SetState(AIState state)
@@ -40,16 +44,32 @@ public class ChaseCreature : CreatureBase
                 break;
             case AIState.Attacking:
                 agent.speed = runSpeed;
-                agent.isStopped = false;
+                agent.isStopped = true;
                 break;
-            case AIState.Fleeing:
+            case AIState.Chasing:
                 agent.speed = runSpeed;
                 agent.isStopped = false;
-                FleeToSafeLocation();
                 break;
         }
 
         animator.speed = agent.speed / walkSpeed;
+    }
+
+    private void ChasingUpdate()
+    {
+        if (playerDistance <= detectDistance && IsPlayerInFieldOfView())
+        {
+            agent.SetDestination(CharacterManager.Instance.Player.transform.position);
+
+            if (playerDistance <= attackDistance)
+            {
+                SetState(AIState.Attacking);
+            }
+        }
+        else
+        {
+            SetState(AIState.Idle);
+        }
     }
 
     protected override void PassiveUpdate()
@@ -67,22 +87,12 @@ public class ChaseCreature : CreatureBase
     {
         if (playerDistance > attackDistance || !IsPlayerInFieldOfView())
         {
-            agent.isStopped = false;
-
-            NavMeshPath path = new NavMeshPath();
-            if (agent.CalculatePath(CharacterManager.Instance.Player.transform.position, path))
-            {
-                agent.SetDestination(CharacterManager.Instance.Player.transform.position);
-            }
-            else
-            {
-                SetState(AIState.Fleeing);
-            }
+            agent.SetDestination(CharacterManager.Instance.Player.transform.position);
+            SetState(AIState.Chasing);
         }
         else
         {
             agent.isStopped = true;
-
             if (Time.time - lastAttackTime > attackRate)
             {
                 lastAttackTime = Time.time;
@@ -92,39 +102,11 @@ public class ChaseCreature : CreatureBase
         }
     }
 
-    protected override void FleeingUpdate()
-    {
-        if (agent.remainingDistance < 0.1f)
-        {
-            FleeToSafeLocation();
-        }
-        else
-        {
-            SetState(AIState.Wandering);
-        }
-    }
-
     private void WanderToNewLocation()
     {
-        if (aiState != AIState.Idle)
-        {
-            return;
-        }
-
+        if (aiState != AIState.Idle) return;
         SetState(AIState.Wandering);
         agent.SetDestination(GetRandomWanderLocation());
-    }
-
-    private void FleeToSafeLocation()
-    {
-        agent.SetDestination(GetRandomFleeLocation());
-    }
-
-    private Vector3 GetRandomFleeLocation()
-    {
-        NavMeshHit hit;
-        NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * safeDistance), out hit, maxWanderDistance, NavMesh.AllAreas);
-        return hit.position;
     }
 
     private Vector3 GetRandomWanderLocation()

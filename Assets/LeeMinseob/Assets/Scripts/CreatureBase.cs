@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public enum AIState
@@ -6,7 +5,7 @@ public enum AIState
     Idle,
     Wandering,
     Attacking,
-    Fleeing
+    Chasing
 }
 
 public class CreatureBase : MonoBehaviour
@@ -19,13 +18,13 @@ public class CreatureBase : MonoBehaviour
     [Header("AI")]
     protected AIState aiState;
     public float detectDistance;
-    public float safeDistance;
 
     [Header("Wandering")]
     public float minWanderDistance;
     public float maxWanderDistance;
     public float minWanderWaitTime;
     public float maxWanderWaitTime;
+    private float idleTime;
 
     [Header("Combat")]
     public int damage;
@@ -42,18 +41,18 @@ public class CreatureBase : MonoBehaviour
     protected virtual void Awake()
     {
         animator = GetComponentInChildren<Animator>();
-
-        // CreatureManager에 등록
-        CreatureManager.Instance.RegisterCreature(this);
+        CreatureManager.Instance.RegisterCreature(this); // CreatureManager에 등록
     }
 
     private void OnDestroy()
     {
-        CreatureManager.Instance.UnregisterCreature(this);
+        CreatureManager.Instance.UnregisterCreature(this); // CreatureManager에서 등록 해제
     }
 
     public virtual void UpdateAI()
     {
+        playerDistance = Vector3.Distance(transform.position, CharacterManager.Instance.Player.transform.position);
+
         animator.SetBool("Moving", aiState != AIState.Idle);
 
         switch (aiState)
@@ -67,9 +66,6 @@ public class CreatureBase : MonoBehaviour
             case AIState.Attacking:
                 AttackingUpdate();
                 break;
-            case AIState.Fleeing:
-                FleeingUpdate();
-                break;
         }
     }
 
@@ -80,15 +76,18 @@ public class CreatureBase : MonoBehaviour
 
     protected virtual void PassiveUpdate()
     {
-        if (playerDistance < detectDistance)
+        if (aiState == AIState.Idle && Time.time >= idleTime)
         {
-            SetState(AIState.Attacking);
+            SetState(AIState.Wandering);
+        }
+
+        if (playerDistance < detectDistance && IsPlayerInFieldOfView())
+        {
+            SetState(AIState.Chasing);
         }
     }
 
     protected virtual void AttackingUpdate() { }
-
-    protected virtual void FleeingUpdate() { }
 
     protected virtual bool IsPlayerInFieldOfView()
     {
