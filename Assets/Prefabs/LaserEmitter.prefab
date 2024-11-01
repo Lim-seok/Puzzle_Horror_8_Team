@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6804262088260379239}
   - component: {fileID: 8343758941307863665}
   m_Layer: 0
-  m_Name: LightEmitter
+  m_Name: LaserEmitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserRenderer: {fileID: 8343758941307863665}
-  maxLaserDistance: 50
+  maxLaserDistance: 10
 --- !u!120 &8343758941307863665
 LineRenderer:
   serializedVersion: 2

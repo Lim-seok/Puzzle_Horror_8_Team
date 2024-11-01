@@ -1,11 +1,10 @@
-using System.Collections;
 using UnityEngine;
 
-public class LightRelay : MonoBehaviour
+public class LaserRelay : MonoBehaviour
 {
     public LineRenderer relayLaserRenderer;
     private bool isLit = false;
-    private Vector3 lastIncomingDirection;
+    private Vector3 lastIncomingDirection = Vector3.forward;
     private float currentRotation = 90f;
 
     private void Start()
@@ -31,7 +30,7 @@ public class LightRelay : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position - lastIncomingDirection * 0.1f, lastIncomingDirection, out hit, 1f))
         {
-            LightRelay previousRelay = hit.collider.GetComponent<LightRelay>();
+            LaserRelay previousRelay = hit.collider.GetComponent<LaserRelay>();
             if (previousRelay != null)
             {
                 isLit = true;
@@ -47,7 +46,11 @@ public class LightRelay : MonoBehaviour
     {
         currentRotation += 90f;
         if (currentRotation >= 360f) currentRotation = 0f;
-        RelayLaser(); // 각도가 변경될 때마다 RelayLaser를 업데이트
+
+        if (CheckLaserHit())
+        {
+            RelayLaser();
+        }
     }
 
     public void OnLaserHit(Vector3 incomingDirection)
@@ -58,9 +61,10 @@ public class LightRelay : MonoBehaviour
         RelayLaser();
     }
 
-
     private void RelayLaser()
     {
+        if (!isLit) return;
+
         Vector3 relayDirection = Quaternion.Euler(0, currentRotation, 0) * lastIncomingDirection;
 
         RaycastHit hit;
@@ -71,18 +75,16 @@ public class LightRelay : MonoBehaviour
             relayLaserRenderer.SetPosition(0, start);
             relayLaserRenderer.SetPosition(1, hit.point);
 
-            LightReceiver receiver = hit.collider.GetComponent<LightReceiver>();
+            LaserReceiver receiver = hit.collider.GetComponent<LaserReceiver>();
             if (receiver != null)
             {
-                // 완료인식
                 receiver.OnLaserReceived();
             }
             else
             {
-                LightRelay nextRelay = hit.collider.GetComponent<LightRelay>();
+                LaserRelay nextRelay = hit.collider.GetComponent<LaserRelay>();
                 if (nextRelay != null)
                 {
-                    // 중계기인식
                     nextRelay.OnLaserHit(relayDirection);
                 }
             }

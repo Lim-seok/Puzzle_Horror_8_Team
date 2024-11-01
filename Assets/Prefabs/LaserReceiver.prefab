@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4191314288073309664}
   - component: {fileID: 3836732421389307443}
   - component: {fileID: 6753044178307713101}
-  - component: {fileID: 7750389452496466608}
+  - component: {fileID: -8843814476991961590}
   m_Layer: 0
-  m_Name: LightReceiver
+  m_Name: LaserReceiver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,7 +106,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7750389452496466608
+--- !u!114 &-8843814476991961590
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,3 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 737aead97c865534ba952eb5a4f889f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  laserTimeout: 1
+  cell:
+    key: Laser
+    state: 0
