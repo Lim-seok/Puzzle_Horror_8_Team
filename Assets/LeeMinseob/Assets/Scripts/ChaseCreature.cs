@@ -4,7 +4,7 @@ using UnityEngine.AI;
 public class ChaseCreature : CreatureBase
 {
     private NavMeshAgent agent;
-
+    public JumpScareEvent jumpScareEvent;
     protected override void Awake()
     {
         base.Awake();
@@ -98,6 +98,8 @@ public class ChaseCreature : CreatureBase
                 lastAttackTime = Time.time;
                 animator.speed = 1;
                 animator.SetTrigger("Attack");
+
+                jumpScareEvent.TriggerJumpScare();
             }
         }
     }
