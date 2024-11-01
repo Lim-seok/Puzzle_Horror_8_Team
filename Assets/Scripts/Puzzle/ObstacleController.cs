@@ -5,6 +5,10 @@ public class ObstacleController : MonoBehaviour
 {
     [SerializeField] private string[] targetKeys;
     private bool[] isSwitchOn;
+    private bool isActivated;
+
+    public event Action OnActivateEvent;
+    public event Action OnDeactivateEvent;
 
     private void Awake()
     {
@@ -33,6 +37,37 @@ public class ObstacleController : MonoBehaviour
             }
         }
 
-        Debug.Log(key + isSolved);
+        CallEvent();
+    }
+
+    protected virtual bool CheckActivation()
+    {
+        bool _isActivated = true;
+        foreach (bool isOn in isSwitchOn)
+        {
+            if (!isOn)
+            {
+                _isActivated = false;
+                break;
+            }
+        }
+        return _isActivated;
+    }
+
+    private void CallEvent()
+    {
+        bool isAllTrue = CheckActivation();
+
+        if (isAllTrue && !isActivated)
+        {
+            isActivated = true;
+            OnActivateEvent?.Invoke();
+        }
+
+        else if (!isAllTrue && isActivated)
+        {
+            isActivated = false;
+            OnDeactivateEvent?.Invoke();
+        }
     }
 }
