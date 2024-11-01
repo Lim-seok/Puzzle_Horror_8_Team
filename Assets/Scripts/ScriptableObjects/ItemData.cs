@@ -8,7 +8,6 @@ public enum ItemType
     Rotation
 }
 
-[System.Serializable]
 [CreateAssetMenu(fileName = "Item", menuName = "New Item")]
 public class ItemData : ScriptableObject
 {
