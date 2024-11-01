@@ -5,12 +5,19 @@ public class LaserReceiver : MonoBehaviour
     private bool isClear = false;
     private float timeSinceLastLaser = 0f;
     public float laserTimeout = 1f;
+    private Vector3 particlePosition;
 
     [SerializeField] private PuzzleSwitchCell cell;
 
     private void Awake()
     {
         PuzzleManager.Instance.AddPuzzleSwitch(cell);
+    }
+
+    private void Start()
+    {
+        particlePosition = transform.position;
+        particlePosition.y -= 1f;
     }
 
     private void Update()
@@ -32,6 +39,12 @@ public class LaserReceiver : MonoBehaviour
 
     private void CompleteQuest()
     {
+        if (PuzzleManager.Instance.puzzleSwitch.ContainsKey("Laser") && PuzzleManager.Instance.puzzleSwitch["Laser"].state)
+        {
+            return;
+        }
+
         PuzzleManager.Instance.SetPuzzleSwitchState(cell.key, true);
+        ParticleManager.Instance.SpawnParticle("LaserReceiver", particlePosition, Quaternion.identity);
     }
 }
