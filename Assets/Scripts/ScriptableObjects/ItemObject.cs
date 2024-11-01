@@ -60,13 +60,6 @@ public class ItemObject : MonoBehaviour, IInteractable
                 rb.velocity = Vector3.zero; // 초기 속도 리셋
             }
 
-            // 콜라이더 다시 활성화 (비활성화했었다면)
-            Collider collider = heldItem.GetComponent<Collider>();
-            if (collider != null)
-            {
-                collider.enabled = true;
-            }
-
             // 아이템을 플레이어 앞에 놓기
             heldItem.transform.position = transform.position + transform.forward * 1f;
 
@@ -91,12 +84,6 @@ public class ItemObject : MonoBehaviour, IInteractable
                 rb.isKinematic = true;
             }
 
-            // 콜라이더 비활성화 (선택적)
-            Collider collider = item.GetComponent<Collider>();
-            if (collider != null)
-            {
-                collider.enabled = false;
-            }
         }
     }
 

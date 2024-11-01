@@ -90,10 +90,4 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnInteraction(InputAction.CallbackContext context)
-    {
-        if(context.)
-    }
-
-
 }
