@@ -5,6 +5,8 @@ public class LaserReceiver : MonoBehaviour
     private bool isClear = false;
     private float timeSinceLastLaser = 0f;
     public float laserTimeout = 1f;
+
+    private GameObject clearPaticle;
     private Vector3 particlePosition;
 
     [SerializeField] private PuzzleSwitchCell cell;
@@ -27,6 +29,7 @@ public class LaserReceiver : MonoBehaviour
         {
             isClear = false;
             PuzzleManager.Instance.SetPuzzleSwitchState(cell.key, false);
+            Destroy(clearPaticle);
         }
     }
 
@@ -45,6 +48,6 @@ public class LaserReceiver : MonoBehaviour
         }
 
         PuzzleManager.Instance.SetPuzzleSwitchState(cell.key, true);
-        ParticleManager.Instance.SpawnParticle("LaserReceiver", particlePosition, Quaternion.identity);
+        clearPaticle = ParticleManager.Instance.SpawnParticle("LaserReceiver", particlePosition, Quaternion.identity);
     }
 }
