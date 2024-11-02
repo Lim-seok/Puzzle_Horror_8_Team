@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
     }
     void CameraLook()
     {
-        camCurXRot = mouseDelta.y * lookSensitivity;
+        camCurXRot += mouseDelta.y * lookSensitivity;
         camCurXRot = Mathf.Clamp(camCurXRot, minXLook, maxXLook);
         cameraContainer.localEulerAngles = new Vector3(-camCurXRot, 0, 0);
 
@@ -89,5 +89,7 @@ public class PlayerController : MonoBehaviour
             spotLight.enabled = !spotLight.enabled;
         }
     }
+
+
 
 }
