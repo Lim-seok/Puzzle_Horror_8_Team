@@ -2,7 +2,7 @@
 name: Bug report
 about: 버그 발생 보고 및 해결 방안 기록
 title: "[BUG]"
-labels: ''
+labels: "\U0001F41E Bug"
 assignees: ''
 
 ---
