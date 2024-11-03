@@ -47,11 +47,14 @@ public class Interaction : MonoBehaviour
                 curInteractable = null;
                 promptText.gameObject.SetActive(false);
             }
-            
         }
-        
-        
-    
+        if (itemPickUp.heldItem != null)
+        {
+            promptText.text = "놓기\nE키를 누르세요.";
+            promptText.gameObject.SetActive(true);
+        }
+
+
     }
 
     private void PerformRaycast()
@@ -85,12 +88,23 @@ public class Interaction : MonoBehaviour
 
     public void OnInteractInput(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started && curInteractable != null)
+        if (itemPickUp.heldItem == null)
         {
-            curInteractable.OnInteract();
-            curInteractGameObject = null;
-            curInteractable = null;
-            promptText.gameObject.SetActive(false);
+            if (context.phase == InputActionPhase.Started && curInteractable != null)
+            {
+                curInteractable.OnInteract();
+                curInteractGameObject = null;
+                curInteractable = null;
+                promptText.gameObject.SetActive(false);
+            }
+        }
+        else if (itemPickUp.heldItem != null)
+        {
+            if (context.phase == InputActionPhase.Started)
+            {
+                itemPickUp.DropItem();
+                promptText.gameObject.SetActive(false);
+            }
         }
     }
    
