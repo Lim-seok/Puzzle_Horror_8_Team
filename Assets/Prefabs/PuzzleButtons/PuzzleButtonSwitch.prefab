@@ -223,7 +223,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3922552783346911850}
   - component: {fileID: 3032980287886658055}
-  - component: {fileID: 6141974507512230418}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -257,7 +256,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.6921348, g: 0.5235849, b: 1, a: 1}
+  m_Color: {r: 0.6901961, g: 0.52156866, b: 1, a: 1}
   m_Intensity: 2.5
   m_Range: 10
   m_SpotAngle: 30
@@ -308,19 +307,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &6141974507512230418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8088823471745537049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c82992f1693f334abf1d197469f7ff8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 6503789456325622396}
 --- !u!1 &8215553104805970144
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,6 +319,7 @@ GameObject:
   - component: {fileID: 5674723085689927148}
   - component: {fileID: 6472075367403067040}
   - component: {fileID: 6503789456325622396}
+  - component: {fileID: 5170130901017542173}
   m_Layer: 0
   m_Name: PuzzleButtonSwitch
   m_TagString: Untagged
@@ -407,3 +394,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetKeys:
   - switch1
+--- !u!114 &5170130901017542173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8215553104805970144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c82992f1693f334abf1d197469f7ff8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightObjs:
+  - {fileID: 8088823471745537049}
+  controller: {fileID: 6503789456325622396}
+  isInitialOn: 0

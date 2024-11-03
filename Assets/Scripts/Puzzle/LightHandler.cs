@@ -3,22 +3,28 @@ using UnityEngine;
 
 public class LightHandler : MonoBehaviour
 {
+    [SerializeField] private GameObject[] lightObjs;
     [SerializeField] private ObstacleController controller;
+    [SerializeField] private bool isInitialOn;
 
     private void Awake()
     {
-        gameObject.SetActive(false);
-        controller.OnActivateEvent += TurnOnLight;
-        controller.OnDeactivateEvent += TurnOffLight;
+        foreach (GameObject light in lightObjs)
+            light.SetActive(isInitialOn);
+
+        controller.OnActivateEvent += SetSwitch;
+        controller.OnDeactivateEvent += UnsetSwitch;
     }
 
-    private void TurnOffLight()
+    private void UnsetSwitch()
     {
-        gameObject.SetActive(false);
+        foreach(GameObject light in lightObjs)
+            light.SetActive(isInitialOn);
     }
 
-    private void TurnOnLight()
+    private void SetSwitch()
     {
-        gameObject.SetActive(true);
+        foreach (GameObject light in lightObjs)
+            light.SetActive(!isInitialOn);
     }
 }
