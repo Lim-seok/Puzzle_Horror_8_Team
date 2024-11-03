@@ -32,10 +32,6 @@ public class ItemObject : MonoBehaviour, IInteractable
                 {
                     itemPickUp.PickUpItem(gameObject);
                 }
-                else
-                {
-                    itemPickUp.DropItem();
-                }
                 break;
 
             case ItemType.Rotation:
