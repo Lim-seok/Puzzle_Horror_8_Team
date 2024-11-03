@@ -22,10 +22,14 @@ public class Interaction : MonoBehaviour
 
     public TextMeshProUGUI promptText;
     private Camera camera;
+    private ItemPickUp itemPickUp;
+
+    
 
     private void Start()
     {
         camera = Camera.main;
+        itemPickUp = GetComponent<ItemPickUp>();
     }
 
     private void Update()
@@ -33,28 +37,46 @@ public class Interaction : MonoBehaviour
         if(Time.time - lastCheckTime > checkRate)
         {
             lastCheckTime = Time.time;
-
-            Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
-            RaycastHit hit;
-
-            if(Physics.Raycast(ray, out hit, maxCheckDistance, layerMask))
+            if(itemPickUp.heldItem == null)
             {
-                if(hit.collider.gameObject != curInteractGameObject)
-                {
-                    curInteractGameObject = hit.collider.gameObject;
-                    curInteractable = hit.collider.GetComponent<IInteractable>();
-                    SetPromptText();
-                }
-                else
-                {
-                    curInteractGameObject = null;
-                    curInteractable = null;
-                    promptText.gameObject.SetActive(false);
-                }
+                PerformRaycast();
             }
+            else
+            {
+                curInteractGameObject = null;
+                curInteractable = null;
+                promptText.gameObject.SetActive(false);
+            }
+            
+        }
+        
+        
+    
+    }
+
+    private void PerformRaycast()
+    {
+        Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, maxCheckDistance, layerMask))
+        {
+            if (hit.collider.gameObject != curInteractGameObject)
+            {
+                curInteractGameObject = hit.collider.gameObject;
+                curInteractable = hit.collider.GetComponent<IInteractable>();
+                SetPromptText();
+            }
+        }
+        else
+        {
+            curInteractGameObject = null;
+            curInteractable = null;
+            promptText.gameObject.SetActive(false);
         }
     }
 
+   
     private void SetPromptText()
     {
         promptText.gameObject.SetActive(true);
@@ -71,4 +93,5 @@ public class Interaction : MonoBehaviour
             promptText.gameObject.SetActive(false);
         }
     }
+   
 }
