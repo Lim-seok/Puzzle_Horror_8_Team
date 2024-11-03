@@ -5,10 +5,16 @@ public class ChaseCreature : CreatureBase
 {
     private NavMeshAgent agent;
     public JumpScareEvent jumpScareEvent;
+    private Collider attackCollider;
+
+
     protected override void Awake()
     {
         base.Awake();
         agent = GetComponent<NavMeshAgent>();
+
+        attackCollider = GetComponent<Collider>();
+        attackCollider.enabled = false;
     }
 
     public override void UpdateAI()
@@ -49,6 +55,7 @@ public class ChaseCreature : CreatureBase
             case AIState.Chasing:
                 agent.speed = runSpeed;
                 agent.isStopped = false;
+                animator.SetBool("Moving", true);
                 break;
         }
 
@@ -100,7 +107,27 @@ public class ChaseCreature : CreatureBase
                 animator.SetTrigger("Attack");
 
                 jumpScareEvent.TriggerJumpScare();
+
+                attackCollider.enabled = true;
+                Invoke("DisableAttackCollider", 0.2f);
             }
+        }
+    }
+
+    private void DisableAttackCollider()
+    {
+        attackCollider.enabled = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        agent.isStopped = true;
+
+        if (other.CompareTag("Player") && aiState == AIState.Attacking)
+        {
+            agent.isStopped = true;
+            SetState(AIState.Attacking);
+            jumpScareEvent.TriggerJumpScare();
         }
     }
 

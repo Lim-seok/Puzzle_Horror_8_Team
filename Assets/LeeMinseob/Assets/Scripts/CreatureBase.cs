@@ -41,12 +41,12 @@ public class CreatureBase : MonoBehaviour
     protected virtual void Awake()
     {
         animator = GetComponentInChildren<Animator>();
-        CreatureManager.Instance.RegisterCreature(this); // CreatureManager에 등록
+        CreatureManager.Instance.RegisterCreature(this);
     }
 
     private void OnDestroy()
     {
-        CreatureManager.Instance.UnregisterCreature(this); // CreatureManager에서 등록 해제
+        CreatureManager.Instance.UnregisterCreature(this);
     }
 
     public virtual void UpdateAI()
