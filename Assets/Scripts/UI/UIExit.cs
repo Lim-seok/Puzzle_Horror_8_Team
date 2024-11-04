@@ -6,6 +6,8 @@ public class UIExit : MonoBehaviour
 {
     public void QuitGame()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Sfx.Button);
+
         #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
         #else

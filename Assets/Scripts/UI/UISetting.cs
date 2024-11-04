@@ -16,11 +16,13 @@ public class UISetting : MonoBehaviour
 
     public void OnSettingPanel()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Sfx.Button);
         settingPanel.SetActive(true);
     }
 
     public void OnExitSettingPanel()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Sfx.Button);
         settingPanel.SetActive(false);
     }
 }
