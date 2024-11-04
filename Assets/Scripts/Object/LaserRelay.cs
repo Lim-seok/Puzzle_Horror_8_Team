@@ -1,11 +1,13 @@
 using UnityEngine;
+using System.Collections;
 
 public class LaserRelay : MonoBehaviour
 {
     public LineRenderer relayLaserRenderer;
     private bool isLit = false;
     private Vector3 lastIncomingDirection = Vector3.forward;
-    private bool laserReceivedThisFrame = false;
+    private float laserTimeout = 0.2f;
+    private float timeSinceLastRelay = 0f;
 
     private void Start()
     {
@@ -14,29 +16,13 @@ public class LaserRelay : MonoBehaviour
 
     private void Update()
     {
-        if (!laserReceivedThisFrame)
+        timeSinceLastRelay += Time.deltaTime;
+
+        if (timeSinceLastRelay >= laserTimeout)
         {
             isLit = false;
             relayLaserRenderer.enabled = false;
         }
-        laserReceivedThisFrame = false;
-    }
-
-    private bool CheckLaserHit()
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position - lastIncomingDirection * 0.1f, lastIncomingDirection, out hit, 1f))
-        {
-            LaserRelay previousRelay = hit.collider.GetComponent<LaserRelay>();
-            if (previousRelay != null)
-            {
-                isLit = true;
-                lastIncomingDirection = hit.normal;
-                relayLaserRenderer.enabled = true;
-                return true;
-            }
-        }
-        return false;
     }
 
     public void OnLaserHit(Vector3 incomingDirection)
@@ -46,7 +32,7 @@ public class LaserRelay : MonoBehaviour
         isLit = true;
         lastIncomingDirection = incomingDirection;
         relayLaserRenderer.enabled = true;
-        laserReceivedThisFrame = true;
+        ResetLaserTimer();
         RelayLaser();
     }
 
@@ -58,6 +44,8 @@ public class LaserRelay : MonoBehaviour
     private void RelayLaser()
     {
         if (!isLit) return;
+
+        ResetLaserTimer();
 
         Vector3 relayDirection = transform.forward;
         RaycastHit hit;
@@ -88,5 +76,10 @@ public class LaserRelay : MonoBehaviour
             relayLaserRenderer.SetPosition(0, start);
             relayLaserRenderer.SetPosition(1, start + relayDirection * 10f);
         }
+    }
+
+    private void ResetLaserTimer()
+    {
+        timeSinceLastRelay = 0f;
     }
 }
