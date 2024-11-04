@@ -6,7 +6,7 @@ using UnityEngine;
 public class ItemObject : MonoBehaviour, IInteractable
 {
     public ItemData data;
-    private ItemPickUp itemPickUp;
+    private Interaction interaction;
 
     private float currentRotation = 0f;
     private const float rotationAmount = 30f;
@@ -14,7 +14,7 @@ public class ItemObject : MonoBehaviour, IInteractable
 
     void Start()
     {
-        itemPickUp = FindObjectOfType<ItemPickUp>();
+        interaction = FindObjectOfType<Interaction>();
     }
     public string GetInteractPrompt()
     {
@@ -28,9 +28,9 @@ public class ItemObject : MonoBehaviour, IInteractable
         {
             case ItemType.Held:
                 //들기타입 아이템처리
-                if (itemPickUp.heldItem == null)
+                if (interaction.heldItem == null)
                 {
-                    itemPickUp.PickUpItem(gameObject);
+                    interaction.PickUpItem(gameObject);
                 }
                 break;
 

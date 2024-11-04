@@ -9,7 +9,6 @@ public interface IInteractable
     public string GetInteractPrompt();
     public void OnInteract();
 }
-
 public class Interaction : MonoBehaviour
 {
     public float checkRate = 0.05f;
@@ -22,22 +21,19 @@ public class Interaction : MonoBehaviour
 
     public TextMeshProUGUI promptText;
     private Camera camera;
-    private ItemPickUp itemPickUp;
-
-    
+    public GameObject heldItem;
 
     private void Start()
     {
         camera = Camera.main;
-        itemPickUp = GetComponent<ItemPickUp>();
     }
 
     private void Update()
     {
-        if(Time.time - lastCheckTime > checkRate)
+        if (Time.time - lastCheckTime > checkRate)
         {
             lastCheckTime = Time.time;
-            if(itemPickUp.heldItem == null)
+            if (heldItem == null)
             {
                 PerformRaycast();
             }
@@ -48,13 +44,11 @@ public class Interaction : MonoBehaviour
                 promptText.gameObject.SetActive(false);
             }
         }
-        if (itemPickUp.heldItem != null)
+        if (heldItem != null)
         {
             promptText.text = "놓기\nE키를 누르세요.";
             promptText.gameObject.SetActive(true);
         }
-
-
     }
 
     private void PerformRaycast()
@@ -79,7 +73,6 @@ public class Interaction : MonoBehaviour
         }
     }
 
-   
     private void SetPromptText()
     {
         promptText.gameObject.SetActive(true);
@@ -88,9 +81,14 @@ public class Interaction : MonoBehaviour
 
     public void OnInteractInput(InputAction.CallbackContext context)
     {
-        if (itemPickUp.heldItem == null)
+        if (context.phase == InputActionPhase.Started)
         {
-            if (context.phase == InputActionPhase.Started && curInteractable != null)
+            if (heldItem != null)
+            {
+                DropItem();
+                promptText.gameObject.SetActive(false);
+            }
+            else if (curInteractable != null && heldItem == null)
             {
                 curInteractable.OnInteract();
                 curInteractGameObject = null;
@@ -98,14 +96,35 @@ public class Interaction : MonoBehaviour
                 promptText.gameObject.SetActive(false);
             }
         }
-        else if (itemPickUp.heldItem != null)
+    }
+    public void PickUpItem(GameObject item)
+    {
+        if (heldItem == null)
         {
-            if (context.phase == InputActionPhase.Started)
+            heldItem = item;
+
+            Rigidbody rb = item.GetComponent<Rigidbody>();
+            if (rb != null)
             {
-                itemPickUp.DropItem();
-                promptText.gameObject.SetActive(false);
+                Destroy(rb);
             }
+            item.transform.SetParent(transform);
+
+            // 플레이어 바로 앞 z축에 아이템 위치시키기
+            item.transform.localPosition = new Vector3(0, 1f, 1f);
+            item.transform.localRotation = Quaternion.identity;
         }
     }
-   
+    public void DropItem()
+    {
+        Rigidbody rb = heldItem.AddComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+        heldItem.transform.SetParent(null);
+
+        heldItem = null;
+    }
 }
