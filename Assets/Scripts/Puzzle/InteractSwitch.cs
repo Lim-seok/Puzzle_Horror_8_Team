@@ -17,9 +17,15 @@ public class InteractSwitch : MonoBehaviour, IInteractable
     public void OnInteract()
     {
         if (cell.state)
-            PuzzleManager.Instance.SetPuzzleSwitchState(cell.key, false);
+        {
+            cell.state = false;
+            cell.ActivateEvent(false);
+        }
 
         else
-            PuzzleManager.Instance.SetPuzzleSwitchState(cell.key, true);
+        {
+            cell.state = true;
+            cell.ActivateEvent(true);
+        }
     }
 }

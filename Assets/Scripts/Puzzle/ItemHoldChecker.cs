@@ -16,6 +16,7 @@ public class ItemHoldChecker : MonoBehaviour
 
     protected virtual void OnItemHold(bool isHolding)
     {
-        PuzzleManager.Instance.SetPuzzleSwitchState(cell.key, isHolding);
+        cell.state = isHolding;
+        cell.ActivateEvent(isHolding);
     }
 }

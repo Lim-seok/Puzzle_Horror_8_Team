@@ -30,7 +30,9 @@ public class LaserReceiver : MonoBehaviour, ILaserParts
         {
             if (!PuzzleManager.Instance.puzzleSwitch["Laser"].state)
             {
-                PuzzleManager.Instance.SetPuzzleSwitchState(cell.key, true);
+                cell.state = true;
+                cell.ActivateEvent(true);
+
                 clearPaticle = ParticleManager.Instance.SpawnParticle("LaserReceiver", particlePosition, Quaternion.identity);
             }
         }
@@ -42,7 +44,9 @@ public class LaserReceiver : MonoBehaviour, ILaserParts
         {
             if (PuzzleManager.Instance.puzzleSwitch["Laser"].state)
             {
-                PuzzleManager.Instance.SetPuzzleSwitchState(cell.key, false);
+                cell.state = false;
+                cell.ActivateEvent(false);
+
                 Destroy(clearPaticle);
             }
         }

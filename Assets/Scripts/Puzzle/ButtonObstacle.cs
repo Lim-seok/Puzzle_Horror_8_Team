@@ -15,13 +15,19 @@ public class ButtonObstacle : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag(switchKeyTag))
-            PuzzleManager.Instance.SetPuzzleSwitchState(cell.key, true);
+        if (other.gameObject.CompareTag(switchKeyTag))
+        {
+            cell.state = true;
+            cell.ActivateEvent(true);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag(switchKeyTag))
-            PuzzleManager.Instance.SetPuzzleSwitchState(cell.key, false);
+        {
+            cell.state = false;
+            cell.ActivateEvent(false);
+        }
     }
 }
