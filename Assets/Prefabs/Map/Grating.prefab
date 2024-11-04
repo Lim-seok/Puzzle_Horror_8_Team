@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8327574132113082088}
   - component: {fileID: 4432053156390406581}
+  - component: {fileID: 2419629499623049645}
+  - component: {fileID: 1485228578570275102}
   m_Layer: 0
   m_Name: Grating
   m_TagString: Untagged
@@ -60,6 +62,35 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.99, y: 3, z: 0.1}
   m_Center: {x: 1.5, y: 1.5, z: 0}
+--- !u!114 &2419629499623049645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135036423911502586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3b3e18ed65d3fe4bb26a24e2e8acd4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectHeight: 0
+  openSpeed: 0
+  closeSpeed: 0
+  isInitialOpened: 0
+--- !u!114 &1485228578570275102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135036423911502586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e13593835efad64ca35e1e83c688393, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetKeys: []
 --- !u!1 &2272948563579040119
 GameObject:
   m_ObjectHideFlags: 0
