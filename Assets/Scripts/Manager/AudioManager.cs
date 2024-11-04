@@ -7,12 +7,12 @@ public class AudioManager : Singleton<AudioManager>
 
     [Header("#BGM")]
     public AudioClip bgmClip;
-    public float bgmVolume;
+    public float bgmVolume = 0.5f;
     AudioSource bgmPlayer;
 
     [Header("#SFX")]
     public AudioClip[] sfxClips;
-    public float sfxVolume;
+    public float sfxVolume = 0.5f;
     public int channels;
     AudioSource[] sfxPlayers;
     int channelIndex;

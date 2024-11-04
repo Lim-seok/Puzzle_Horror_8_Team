@@ -264,6 +264,7 @@ GameObject:
   - component: {fileID: 1848142572933805317}
   - component: {fileID: 7971825309937873566}
   - component: {fileID: 3674758539395296977}
+  - component: {fileID: 5250786102202322488}
   m_Layer: 0
   m_Name: KeyCube
   m_TagString: KeyCube
@@ -371,7 +372,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2725179776465398747}
   serializedVersion: 4
-  m_Mass: 3
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -425,6 +426,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetKeys:
   - switch1
+--- !u!114 &5250786102202322488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2725179776465398747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 979ce3955617a0a479c45bf5ce100127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 7410b2751ee42ed4293532367a643a7a, type: 2}
 --- !u!1 &3348929963833569428
 GameObject:
   m_ObjectHideFlags: 0
