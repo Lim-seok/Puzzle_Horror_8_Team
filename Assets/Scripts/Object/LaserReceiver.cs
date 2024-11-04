@@ -1,22 +1,9 @@
 using UnityEngine;
 
-public interface ILaserParts
-{
-    public void OnLaserHit();
-    public void OnLaserMiss();
-}
-
-public class LaserReceiver : MonoBehaviour, ILaserParts
+public class LaserReceiver : PuzzleBase, ILaserRecieve
 {
     private GameObject clearPaticle;
     private Vector3 particlePosition;
-
-    [SerializeField] private PuzzleSwitchCell cell;
-
-    private void Awake()
-    {
-        PuzzleManager.Instance.AddPuzzleSwitch(cell);
-    }
 
     private void Start()
     {
@@ -26,29 +13,21 @@ public class LaserReceiver : MonoBehaviour, ILaserParts
 
     public void OnLaserHit()
     {
-        if (PuzzleManager.Instance.puzzleSwitch.ContainsKey("Laser"))
+        if (!CheckState())
         {
-            if (!PuzzleManager.Instance.puzzleSwitch["Laser"].state)
-            {
-                cell.state = true;
-                cell.ActivateEvent(true);
+            SetPuzzleState(true);
 
-                clearPaticle = ParticleManager.Instance.SpawnParticle("LaserReceiver", particlePosition, Quaternion.identity);
-            }
+            clearPaticle = ParticleManager.Instance.SpawnParticle("LaserReceiver", particlePosition, Quaternion.identity);
         }
     }
 
     public void OnLaserMiss()
     {
-        if (PuzzleManager.Instance.puzzleSwitch.ContainsKey("Laser"))
+        if (CheckState())
         {
-            if (PuzzleManager.Instance.puzzleSwitch["Laser"].state)
-            {
-                cell.state = false;
-                cell.ActivateEvent(false);
+            SetPuzzleState(false);
 
-                Destroy(clearPaticle);
-            }
+            Destroy(clearPaticle);
         }
     }
 }

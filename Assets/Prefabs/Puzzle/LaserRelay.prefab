@@ -256,5 +256,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayCheckRate: 0.2
+  laserRenderer: {fileID: 7170668717136822572}
   maxLaserDistance: 10
-  relayLaserRenderer: {fileID: 7170668717136822572}

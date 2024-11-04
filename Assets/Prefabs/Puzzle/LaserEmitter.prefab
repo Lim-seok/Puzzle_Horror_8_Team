@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4219573098917847370}
   - component: {fileID: 8985471812231336116}
   - component: {fileID: 6804262088260379239}
-  - component: {fileID: 8343758941307863665}
   m_Layer: 0
   m_Name: LaserEmitter
   m_TagString: Untagged
@@ -33,7 +32,8 @@ Transform:
   m_LocalPosition: {x: 64.17, y: 1, z: -6.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2340256209808352391}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6041570628330295531
@@ -120,16 +120,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayCheckRate: 0.2
-  laserRenderer: {fileID: 8343758941307863665}
+  laserRenderer: {fileID: 1414812452294202856}
   maxLaserDistance: 10
---- !u!120 &8343758941307863665
+--- !u!1 &6606120693984176906
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2340256209808352391}
+  - component: {fileID: 1414812452294202856}
+  m_Layer: 0
+  m_Name: Laser
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2340256209808352391
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6606120693984176906}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 307843187992827660}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!120 &1414812452294202856
 LineRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3092975243016036993}
+  m_GameObject: {fileID: 6606120693984176906}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1

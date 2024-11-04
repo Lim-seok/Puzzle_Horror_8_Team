@@ -39,10 +39,4 @@ public class PuzzleManager : Singleton<PuzzleManager>
     {
         return puzzleSwitch[key];
     }
-
-    public void SetPuzzleSwitchState(string key, bool state)
-    {
-        puzzleSwitch[key].state = state;
-        puzzleSwitch[key].ActivateEvent(state);
-    }
 }

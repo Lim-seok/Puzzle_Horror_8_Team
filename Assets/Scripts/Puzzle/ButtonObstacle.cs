@@ -2,23 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonObstacle : MonoBehaviour
+public class ButtonObstacle : PuzzleBase
 {
-    [SerializeField] private PuzzleSwitchCell cell;
     [SerializeField] private string switchKeyTag;
+    [SerializeField] private int cubeAmount;
 
-    // Start is called before the first frame update
-    private void Awake()
+    private void Start()
     {
-        PuzzleManager.Instance.AddPuzzleSwitch(cell);
+        cubeAmount = 0;
     }
 
     protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag(switchKeyTag))
         {
-            cell.state = true;
-            cell.ActivateEvent(true);
+            if(cubeAmount == 0)
+                SetPuzzleState(true);
+
+            cubeAmount++;
         }
     }
 
@@ -26,8 +27,13 @@ public class ButtonObstacle : MonoBehaviour
     {
         if (other.gameObject.CompareTag(switchKeyTag))
         {
-            cell.state = false;
-            cell.ActivateEvent(false);
+            cubeAmount--;
+
+            if (cubeAmount < 0)
+                cubeAmount = 0;
+
+            if (cubeAmount == 0)
+                SetPuzzleState(false);
         }
     }
 }

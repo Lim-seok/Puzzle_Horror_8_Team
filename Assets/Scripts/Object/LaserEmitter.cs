@@ -6,29 +6,40 @@ public class LaserEmitter : MonoBehaviour
     private float rayCheckTime;
 
     public LineRenderer laserRenderer;
-    private ILaserParts rayHitComponent;
+    protected ILaserRecieve rayHitComponent;
     public float maxLaserDistance = 10f;
 
-    private void Update()
+    [SerializeField]private bool isActivated;
+
+    private void Awake()
     {
-        if (Time.time - rayCheckTime > rayCheckRate)
-        {
-            FireLaser();
-        }
+        SetActivation(true);
+    }
+
+    protected virtual void Start()
+    {
+        rayCheckTime = Time.time;
+    }
+
+    protected virtual void Update()
+    {
+        if (isActivated)
+            if (Time.time - rayCheckTime > rayCheckRate)
+                FireLaser();
     }
 
     private void FireLaser()
     {
-        Vector3 relayDirection = transform.forward;
+        Vector3 laserDirection = transform.forward;
         RaycastHit hit;
         Vector3 start = transform.position;
 
-        if (Physics.Raycast(start, relayDirection, out hit, 10f))
+        if (Physics.Raycast(start, laserDirection, out hit, 10f))
         {
             laserRenderer.SetPosition(0, start);
             laserRenderer.SetPosition(1, hit.point);
 
-            ILaserParts nextPart = hit.collider.GetComponent<ILaserParts>();
+            ILaserRecieve nextPart = hit.collider.GetComponent<ILaserRecieve>();
 
             if (nextPart != null)
             {
@@ -54,7 +65,22 @@ public class LaserEmitter : MonoBehaviour
         else
         {
             laserRenderer.SetPosition(0, start);
-            laserRenderer.SetPosition(1, start + relayDirection * maxLaserDistance);
+            laserRenderer.SetPosition(1, start + laserDirection * maxLaserDistance);
         }
+    }
+
+    public void SetActivation(bool activation)
+    {
+        if (activation == false)
+        {
+            if (rayHitComponent != null)
+            {
+                rayHitComponent.OnLaserMiss();
+                rayHitComponent = null;
+            }
+        }
+
+        laserRenderer.enabled = activation;
+        isActivated = activation;
     }
 }
