@@ -42,20 +42,27 @@ public class ChaseCreature : CreatureBase
             case AIState.Idle:
                 agent.speed = walkSpeed;
                 agent.isStopped = true;
+                animator.SetBool("Moving", false);
+                animator.SetBool("Chase", false); 
                 break;
             case AIState.Wandering:
                 agent.speed = walkSpeed;
                 agent.isStopped = false;
+                animator.SetBool("Moving", true);
+                animator.SetBool("Chase", false);  
                 WanderToNewLocation();
                 break;
             case AIState.Attacking:
-                agent.speed = runSpeed;
+                agent.speed = walkSpeed;
                 agent.isStopped = true;
+                animator.SetBool("Chase", false); 
+                animator.SetTrigger("Attack"); 
                 break;
             case AIState.Chasing:
                 agent.speed = runSpeed;
                 agent.isStopped = false;
-                animator.SetBool("Moving", true);
+                animator.SetBool("Moving", false);  
+                animator.SetBool("Chase", true);    
                 break;
         }
 
