@@ -5,7 +5,8 @@ using UnityEngine;
 public enum ItemType
 {
     Held,
-    Rotation
+    Rotation,
+    Button
 }
 
 [CreateAssetMenu (fileName = "Item", menuName = "New Item")]
