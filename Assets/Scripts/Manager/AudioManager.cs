@@ -9,6 +9,7 @@ public class AudioManager : Singleton<AudioManager>
     public AudioClip bgmClip;
     public float bgmVolume = 0.5f;
     AudioSource bgmPlayer;
+    private bool isBGMPlay;
 
     [Header("#SFX")]
     public AudioClip[] sfxClips;
@@ -45,19 +46,7 @@ public class AudioManager : Singleton<AudioManager>
             sfxPlayers[index].playOnAwake = false;
             sfxPlayers[index].volume = sfxVolume;
         }
-        PlayBGM(true);
-    }
-
-    public void PlayBGM(bool isPlay)
-    {
-        if (isPlay)
-        {
-            bgmPlayer.Play();
-        }
-        else
-        {
-            bgmPlayer.Stop();
-        }
+        bgmPlayer.Play();
     }
 
     public void PlaySFX(Sfx sfx)
@@ -68,9 +57,28 @@ public class AudioManager : Singleton<AudioManager>
     public void SetBGMVolume(float volume)
     {
         bgmVolume = volume;
+
         if (bgmPlayer != null)
+        {
             bgmPlayer.volume = bgmVolume;
+
+            if (bgmVolume <= 0)
+            {
+                if (bgmPlayer.isPlaying)
+                {
+                    bgmPlayer.Pause();
+                }
+            }
+            else
+            {
+                if (!bgmPlayer.isPlaying)
+                {
+                    bgmPlayer.Play();
+                }
+            }
+        }
     }
+
 
     public void SetSFXVolume(float volume)
     {
