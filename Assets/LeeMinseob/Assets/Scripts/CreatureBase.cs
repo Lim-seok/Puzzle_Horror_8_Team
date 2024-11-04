@@ -53,8 +53,6 @@ public class CreatureBase : MonoBehaviour
     {
         playerDistance = Vector3.Distance(transform.position, CharacterManager.Instance.Player.transform.position);
 
-        animator.SetBool("Moving", aiState != AIState.Idle);
-
         switch (aiState)
         {
             case AIState.Idle:

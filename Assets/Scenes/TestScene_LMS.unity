@@ -9218,7 +9218,7 @@ MonoBehaviour:
   m_UpdateMethod: 2
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
-    m_Style: 1
+    m_Style: 0
     m_Time: 2
     m_CustomCurve:
       serializedVersion: 2
@@ -13746,9 +13746,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8732255308454945352, guid: 358c20f77d26c6e43a7927063fca2087, type: 3}
-      propertyPath: m_Priority
-      value: 0
+    - target: {fileID: 9040918258523938899, guid: 358c20f77d26c6e43a7927063fca2087, type: 3}
+      propertyPath: shakeDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9040918258523938899, guid: 358c20f77d26c6e43a7927063fca2087, type: 3}
+      propertyPath: shakeMagnitude
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
