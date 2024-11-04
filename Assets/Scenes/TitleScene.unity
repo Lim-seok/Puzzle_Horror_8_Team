@@ -756,7 +756,7 @@ MonoBehaviour:
   sfxClips:
   - {fileID: 8300000, guid: bc33de580807419469a0a814c89f99c3, type: 3}
   sfxVolume: 0.5
-  channels: 0
+  channels: 1
 --- !u!4 &563109464
 Transform:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ public class AudioManager : Singleton<AudioManager>
     AudioSource[] sfxPlayers;
     int channelIndex;
 
-    public enum Sfx {  FootStep, Enemy, Hit, Item, Gameover, Flash}
+    public enum Sfx { Button }
 
     protected override void Awake()
     {
