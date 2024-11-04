@@ -7,14 +7,15 @@ public class ItemObject : MonoBehaviour, IInteractable
 {
     public ItemData data;
     private Interaction interaction;
-
     private float currentRotation = 0f;
     private const float rotationAmount = 30f;
 
+    private ButtonController buttonController;
 
     void Start()
     {
         interaction = FindObjectOfType<Interaction>();
+        buttonController = GetComponent<ButtonController>();
     }
     public string GetInteractPrompt()
     {
@@ -37,6 +38,14 @@ public class ItemObject : MonoBehaviour, IInteractable
             case ItemType.Rotation:
                 //회전타입 아이템처리
                 RotateObject();
+                break;
+
+            case ItemType.Button:
+                // 버튼 타입 아이템 처리
+                if (buttonController != null)
+                {
+                    buttonController.OnButtonInteract();
+                }
                 break;
 
             default:
