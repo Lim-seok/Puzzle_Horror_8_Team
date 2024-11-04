@@ -5,7 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public PlayerController controller;
-    public ItemData itemData; 
+    public ItemData itemData;
+    public Interaction interaction;
 
     private void Awake()
     {
