@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Performed)
         {
             curMovementInput = context.ReadValue<Vector2>();
+            AudioManager.Instance.PlaySFX(AudioManager.Sfx.FootStep);
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
