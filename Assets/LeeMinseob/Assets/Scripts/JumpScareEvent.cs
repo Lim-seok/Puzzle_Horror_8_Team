@@ -8,7 +8,6 @@ public class JumpScareEvent : MonoBehaviour
     public Transform creatureTransform;
     public Transform playerTransform;
     public PlayerController playerController;
-    public float rotationSpeed = 2.0f;
     public float cameraTransitionDuration = 1.0f;
 
 
@@ -23,9 +22,12 @@ public class JumpScareEvent : MonoBehaviour
 
     private int originalPriority;
 
+    private CameraShake cameraShake;
+
     private void Awake()
     {
         creatureVirtualCamera = GetComponentInChildren<CinemachineVirtualCamera>();
+        cameraShake = creatureVirtualCamera.GetComponent<CameraShake>();
 
         if (creatureVirtualCamera != null)
         {
@@ -46,6 +48,11 @@ public class JumpScareEvent : MonoBehaviour
         {
             creatureVirtualCamera.Priority = 100; 
             creatureVirtualCamera.LookAt = headTarget; 
+        }
+
+        if (cameraShake != null)
+        {
+            cameraShake.TriggerShake();
         }
 
         StartCoroutine(HandleJumpScare());
