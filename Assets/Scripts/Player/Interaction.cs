@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using static UnityEditor.Progress;
+using System;
 
 public interface IInteractable
 {
@@ -24,6 +25,8 @@ public class Interaction : MonoBehaviour
     private Camera camera;
     public GameObject heldItem;
     private FixedJoint fixedJoint;
+
+    public event Action<bool> OnHoldEvent;
 
     private void Start()
     {
@@ -112,6 +115,7 @@ public class Interaction : MonoBehaviour
             fixedJoint = gameObject.AddComponent<FixedJoint>();
             fixedJoint.connectedBody = rb;
 
+            OnHoldEvent?.Invoke(true);
         }
     }
     public void DropItem()
@@ -123,6 +127,8 @@ public class Interaction : MonoBehaviour
                 Destroy(fixedJoint);
                 fixedJoint = null;
             }
+
+            OnHoldEvent?.Invoke(false);
         }
         heldItem = null;
     }
