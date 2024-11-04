@@ -27,7 +27,6 @@ public class ObstacleController : MonoBehaviour
     {
         foreach (KeyContainer keyContainers in targetKeys)
         {
-            Debug.Log(keyContainers.keys.Length);
             isSwitchOn.Add(new bool[keyContainers.keys.Length]);
         }
     }
