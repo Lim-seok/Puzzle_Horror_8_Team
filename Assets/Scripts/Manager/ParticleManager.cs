@@ -31,7 +31,7 @@ public class ParticleManager : Singleton<ParticleManager>
         if (particleDict.ContainsKey(particleName))
         {
             GameObject particleObj = Instantiate(particleDict[particleName], position, rotation);
-            ParticleSystem particleSystem = particleObj.GetComponentInChildren<ParticleSystem>();
+            ParticleSystem particleSystem = particleObj.GetComponent<ParticleSystem>();
 
             if (particleSystem != null)
             {
