@@ -1,10 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ObstacleController : MonoBehaviour
 {
-    [SerializeField] private string[] targetKeys;
-    private bool[] isSwitchOn;
+    [Serializable]
+    public struct KeyContainer
+    {
+        public string[] keys;
+
+        public KeyContainer(string[] _targetKeys)
+        {
+            keys = _targetKeys.ToArray();
+        }
+    }
+
+    [SerializeField] private KeyContainer[] targetKeys;
+    private List<bool[]> isSwitchOn = new List<bool[]>();
     private bool isActivated;
 
     public event Action OnActivateEvent;
@@ -12,29 +25,45 @@ public class ObstacleController : MonoBehaviour
 
     private void Awake()
     {
-        isSwitchOn = new bool[targetKeys.Length];
+        foreach (KeyContainer keyContainers in targetKeys)
+        {
+            Debug.Log(keyContainers.keys.Length);
+            isSwitchOn.Add(new bool[keyContainers.keys.Length]);
+        }
     }
 
     private void Start()
     {
-        foreach (string targetKey in targetKeys)
+        foreach (KeyContainer keys in targetKeys)
         {
-            if (PuzzleManager.Instance.CheckDictionary(targetKey))
+            foreach (string targetKey in keys.keys)
             {
-                PuzzleManager.Instance.GetSwitch(targetKey).switchEvent += ApplySwitch;
+                if (PuzzleManager.Instance.CheckDictionary(targetKey))
+                {
+                    PuzzleManager.Instance.GetSwitch(targetKey).switchEvent += ApplySwitch;
+                }
             }
         }
     }
 
     protected virtual void ApplySwitch(string key, bool isSolved)
     {
-        for (int i = 0; i < targetKeys.Length; i++)
-        {
-            if (targetKeys[i] == key)
+        bool isFound = false;
+
+        for(int j = 0; j < targetKeys.Length; j++)
+        {    
+            for (int i = 0; i < targetKeys[j].keys.Length; i++)
             {
-                isSwitchOn[i] = isSolved;
-                break;
+                if (targetKeys[j].keys[i] == key)
+                {
+                    isSwitchOn[j][i] = isSolved;
+                    isFound = true;
+                    break;
+                }
             }
+
+            if (isFound)
+                break;
         }
 
         CallEvent();
@@ -42,15 +71,25 @@ public class ObstacleController : MonoBehaviour
 
     protected virtual bool CheckActivation()
     {
-        bool _isActivated = true;
-        foreach (bool isOn in isSwitchOn)
+        bool _isActivated = false;
+
+        foreach (bool[] switches in isSwitchOn)
         {
-            if (!isOn)
+            _isActivated = true;
+
+            foreach (bool isOn in switches)
             {
-                _isActivated = false;
-                break;
+                if (!isOn)
+                {
+                    _isActivated = false;
+                    break;
+                }
             }
+
+            if (_isActivated)
+                break;
         }
+
         return _isActivated;
     }
 
