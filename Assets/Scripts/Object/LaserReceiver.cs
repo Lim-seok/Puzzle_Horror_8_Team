@@ -1,11 +1,13 @@
 using UnityEngine;
 
-public class LaserReceiver : MonoBehaviour
+public interface ILaserParts
 {
-    private bool isClear = false;
-    private float timeSinceLastLaser = 0f;
-    public float laserTimeout = 1f;
+    public void OnLaserHit();
+    public void OnLaserMiss();
+}
 
+public class LaserReceiver : MonoBehaviour, ILaserParts
+{
     private GameObject clearPaticle;
     private Vector3 particlePosition;
 
@@ -22,32 +24,27 @@ public class LaserReceiver : MonoBehaviour
         particlePosition.y -= 1f;
     }
 
-    private void Update()
+    public void OnLaserHit()
     {
-        timeSinceLastLaser += Time.deltaTime;
-        if (timeSinceLastLaser > laserTimeout && isClear)
+        if (PuzzleManager.Instance.puzzleSwitch.ContainsKey("Laser"))
         {
-            isClear = false;
-            PuzzleManager.Instance.SetPuzzleSwitchState(cell.key, false);
-            Destroy(clearPaticle);
+            if (!PuzzleManager.Instance.puzzleSwitch["Laser"].state)
+            {
+                PuzzleManager.Instance.SetPuzzleSwitchState(cell.key, true);
+                clearPaticle = ParticleManager.Instance.SpawnParticle("LaserReceiver", particlePosition, Quaternion.identity);
+            }
         }
     }
 
-    public void OnLaserReceived()
+    public void OnLaserMiss()
     {
-        isClear = true;
-        timeSinceLastLaser = 0f;
-        CompleteQuest();
-    }
-
-    private void CompleteQuest()
-    {
-        if (PuzzleManager.Instance.puzzleSwitch.ContainsKey("Laser") && PuzzleManager.Instance.puzzleSwitch["Laser"].state)
+        if (PuzzleManager.Instance.puzzleSwitch.ContainsKey("Laser"))
         {
-            return;
+            if (PuzzleManager.Instance.puzzleSwitch["Laser"].state)
+            {
+                PuzzleManager.Instance.SetPuzzleSwitchState(cell.key, false);
+                Destroy(clearPaticle);
+            }
         }
-
-        PuzzleManager.Instance.SetPuzzleSwitchState(cell.key, true);
-        clearPaticle = ParticleManager.Instance.SpawnParticle("LaserReceiver", particlePosition, Quaternion.identity);
     }
 }

@@ -255,4 +255,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d81f452f5adf341a2994b1bec15f8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rayCheckRate: 0.2
+  maxLaserDistance: 10
   relayLaserRenderer: {fileID: 7170668717136822572}

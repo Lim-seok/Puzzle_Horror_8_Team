@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f400b2d27cbd5b49aeeb5c541cad67a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rayCheckRate: 0.2
   laserRenderer: {fileID: 8343758941307863665}
   maxLaserDistance: 10
 --- !u!120 &8343758941307863665

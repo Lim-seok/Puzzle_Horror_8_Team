@@ -1,85 +1,99 @@
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
-public class LaserRelay : MonoBehaviour
+public class LaserRelay : MonoBehaviour, ILaserParts
 {
-    public LineRenderer relayLaserRenderer;
+    [SerializeField] private float rayCheckRate;
+    private float rayCheckTime;
     private bool isLit = false;
-    private Vector3 lastIncomingDirection = Vector3.forward;
-    private float laserTimeout = 0.2f;
-    private float timeSinceLastRelay = 0f;
+    public float maxLaserDistance = 10f;
 
+    public LineRenderer relayLaserRenderer;
+    private ILaserParts rayHitComponent;
+    
     private void Start()
     {
         relayLaserRenderer.enabled = false;
+        rayCheckTime = Time.time;
     }
 
     private void Update()
     {
-        timeSinceLastRelay += Time.deltaTime;
-
-        if (timeSinceLastRelay >= laserTimeout)
+        if(isLit == true)
         {
-            isLit = false;
-            relayLaserRenderer.enabled = false;
+            if(Time.time - rayCheckTime > rayCheckRate)
+            {
+                FireLaser();
+            }
         }
     }
 
-    public void OnLaserHit(Vector3 incomingDirection)
+    public void OnLaserHit()
     {
         if (isLit) return;
 
         isLit = true;
-        lastIncomingDirection = incomingDirection;
-        relayLaserRenderer.enabled = true;
-        ResetLaserTimer();
-        RelayLaser();
+
+        if(!relayLaserRenderer.enabled)
+            relayLaserRenderer.enabled = true;
     }
 
-    public void EnableRelayRenderer()
+    public void OnLaserMiss()
     {
-        relayLaserRenderer.enabled = true;
+        isLit = false;
+
+        if (relayLaserRenderer.enabled)
+            relayLaserRenderer.enabled = false;
+
+        if (rayHitComponent != null)
+        {
+            rayHitComponent.OnLaserMiss();
+            rayHitComponent = null;
+        }
     }
 
-    private void RelayLaser()
+    private void FireLaser()
     {
         if (!isLit) return;
-
-        ResetLaserTimer();
 
         Vector3 relayDirection = transform.forward;
         RaycastHit hit;
         Vector3 start = transform.position;
 
-        if (Physics.Raycast(start, relayDirection, out hit, 10f))
+        if (Physics.Raycast(start, relayDirection, out hit, maxLaserDistance))
         {
             relayLaserRenderer.SetPosition(0, start);
             relayLaserRenderer.SetPosition(1, hit.point);
 
-            LaserReceiver receiver = hit.collider.GetComponent<LaserReceiver>();
-            if (receiver != null)
+            ILaserParts nextPart = hit.collider.GetComponent<ILaserParts>();
+            
+            if (nextPart != null)
             {
-                receiver.OnLaserReceived();
+                if (rayHitComponent != nextPart)
+                {
+                    if (rayHitComponent != null)
+                        rayHitComponent.OnLaserMiss();
+
+                    rayHitComponent = nextPart;
+                    nextPart.OnLaserHit();
+                }
             }
+
             else
             {
-                LaserRelay nextRelay = hit.collider.GetComponent<LaserRelay>();
-                if (nextRelay != null && !nextRelay.isLit)
+                if (rayHitComponent != null)
                 {
-                    nextRelay.EnableRelayRenderer();
-                    nextRelay.OnLaserHit(relayDirection);
+                    rayHitComponent.OnLaserMiss();
+                    rayHitComponent = null;
                 }
             }
         }
+
         else
         {
             relayLaserRenderer.SetPosition(0, start);
-            relayLaserRenderer.SetPosition(1, start + relayDirection * 10f);
+            relayLaserRenderer.SetPosition(1, start + relayDirection * maxLaserDistance);
         }
-    }
-
-    private void ResetLaserTimer()
-    {
-        timeSinceLastRelay = 0f;
     }
 }
