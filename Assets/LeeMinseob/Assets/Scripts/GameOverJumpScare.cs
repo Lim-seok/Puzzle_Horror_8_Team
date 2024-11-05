@@ -1,28 +1,26 @@
 using UnityEngine;
 using System.Collections;
 
-public class GameOverEvent : MonoBehaviour
+public class GameOverJumpScare : MonoBehaviour
 {
-    public GameObject creaturePrefab; 
-    public Transform creatureSpawnPoint; // 프리팹을 소환할 위치
-    //public PlayerController playerController; 
-    public Vector3 cameraOffset = new Vector3(0.46f, 0.66f, 3.58f);
-    public float cameraTransitionDuration = 1.0f;
+    public GameObject creatureObject;
+    public Transform playerTransform;
+    public PlayerController playerController;
 
-    private GameObject spawnedGameOverObject;
+    public Vector3 cameraOffset = new Vector3(0.46f, 0.66f, 3.58f);
+    public float cameraMoveSpeed = 1.0f;
+
     private Camera mainCamera;
-    
     private bool isGameOverActive = false;
+    private SkinnedMeshRenderer[] skinnedMeshRenderers;
+    private Canvas[] uiCanvases;
 
     private void Awake()
     {
-        mainCamera = Camera.main; 
-    }
+        mainCamera = Camera.main;
+        creatureObject.SetActive(false);
 
-    private void Start()
-    {
-        //테스트때만 사용
-        TriggerGameOver();
+        uiCanvases = FindObjectsOfType<Canvas>();
     }
 
     public void TriggerGameOver()
@@ -31,37 +29,60 @@ public class GameOverEvent : MonoBehaviour
 
         isGameOverActive = true;
 
-        //if (playerController != null)
-        //{
-        //    playerController.enabled = false;
-        //}
+        if (playerController != null)
+        {
+            playerController.enabled = false; 
+        }
 
-        spawnedGameOverObject = Instantiate(creaturePrefab, creatureSpawnPoint.position, creatureSpawnPoint.rotation);
+        creatureObject.transform.position = playerTransform.position + playerTransform.TransformDirection(cameraOffset);
 
- 
+        Vector3 creaturePosition = creatureObject.transform.position;
+        creaturePosition.y -= 0.6f; 
+        creatureObject.transform.position = creaturePosition;
+
+        creatureObject.SetActive(true); 
+        SetAllUICanvasesActive(false); 
+
         StartCoroutine(CameraToJumpScare());
     }
 
     private IEnumerator CameraToJumpScare()
     {
+
         Vector3 initialPosition = mainCamera.transform.position;
         Quaternion initialRotation = mainCamera.transform.rotation;
 
-        Vector3 targetPosition = creatureSpawnPoint.position + creatureSpawnPoint.TransformDirection(cameraOffset);
-        Quaternion targetRotation = Quaternion.LookRotation(creatureSpawnPoint.position - targetPosition);
+        Vector3 targetPosition = creatureObject.transform.position + creatureObject.transform.TransformDirection(cameraOffset);
+        Quaternion targetRotation = Quaternion.LookRotation(creatureObject.transform.position - targetPosition);
 
         float elapsed = 0f;
-        while (elapsed < cameraTransitionDuration)
+        while (elapsed < cameraMoveSpeed)
         {
-            mainCamera.transform.position = Vector3.Lerp(initialPosition, targetPosition, elapsed / cameraTransitionDuration);
-            mainCamera.transform.rotation = Quaternion.Slerp(initialRotation, targetRotation, elapsed / cameraTransitionDuration);
+            mainCamera.transform.position = Vector3.Lerp(initialPosition, targetPosition, elapsed / cameraMoveSpeed);
+            mainCamera.transform.rotation = Quaternion.Slerp(initialRotation, targetRotation, elapsed / cameraMoveSpeed);
 
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        // 카메라 고정이 왜필요한지?
         mainCamera.transform.position = targetPosition;
         mainCamera.transform.rotation = targetRotation;
+    }
+
+
+    private void SetSkinnedMeshRendererActive(bool isActive)
+    {
+        foreach (var renderer in skinnedMeshRenderers)
+        {
+            renderer.enabled = isActive;
+        }
+    }
+
+    private void SetAllUICanvasesActive(bool isActive)
+    {
+        foreach (var canvas in uiCanvases)
+        {
+            canvas.gameObject.SetActive(isActive);
+        }
     }
 }

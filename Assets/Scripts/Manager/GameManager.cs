@@ -4,8 +4,10 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     public ButtonController[] buttons;
-    private int activeButtonCount = 4;
+    private int activeButtonCount = 3;
     private bool isCheckingWinOrLose = false;
+
+    public GameOverJumpScare gameOverJumpScare;
 
     private void Start()
     {
@@ -16,8 +18,10 @@ public class GameManager : Singleton<GameManager>
 
         buttons[0].SetState(true);
         buttons[1].SetState(true);
-        buttons[5].SetState(true);
-        buttons[7].SetState(true);
+        buttons[2].SetState(true);
+
+        //buttons[5].SetState(true);
+        //buttons[7].SetState(true);
     }
 
     public void UpdateButtonCount(bool isActivated)
@@ -41,7 +45,16 @@ public class GameManager : Singleton<GameManager>
         }
         else if (activeButtonCount == 0)
         {
-            Debug.Log("게임 오버!");
+            if (gameOverJumpScare != null)
+            {
+                gameOverJumpScare.TriggerGameOver();
+            }
+            else
+            {
+                Debug.Log("게임 오버!");
+            }
+            
+
         }
 
         isCheckingWinOrLose = false;
