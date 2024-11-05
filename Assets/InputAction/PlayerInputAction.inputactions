@@ -1,5 +1,5 @@
 {
-    "name": "New Controls",
+    "name": "PlayerInputAction",
     "maps": [
         {
             "name": "Player",
@@ -45,6 +45,15 @@
                     "name": "Interaction",
                     "type": "Button",
                     "id": "a845e86d-f1da-4c0e-bf13-2da3ae6be93d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Menu",
+                    "type": "Button",
+                    "id": "3240edcd-0498-4690-9afa-0487ee084f25",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -148,6 +157,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interaction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "49640214-2b9c-41c9-be5b-b03422c8a8f1",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

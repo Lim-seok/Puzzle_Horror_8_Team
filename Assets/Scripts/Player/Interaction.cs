@@ -22,7 +22,7 @@ public class Interaction : MonoBehaviour
     private IInteractable curInteractable;
 
     public TextMeshProUGUI promptText;
-    private Camera camera;
+    private Camera _camera;
     public GameObject heldItem;
     private FixedJoint fixedJoint;
 
@@ -30,7 +30,7 @@ public class Interaction : MonoBehaviour
 
     private void Start()
     {
-        camera = Camera.main;
+        _camera = Camera.main;
     }
 
     private void Update()
@@ -51,14 +51,14 @@ public class Interaction : MonoBehaviour
         }
         if (heldItem != null)
         {
-            promptText.text = "³õ±â\nEÅ°¸¦ ´©¸£¼¼¿ä.";
+            promptText.text = "ï¿½ï¿½ï¿½ï¿½\nEÅ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.";
             promptText.gameObject.SetActive(true);
         }
     }
 
     private void PerformRaycast()
     {
-        Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+        Ray ray = GetComponent<Camera>().ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, maxCheckDistance, layerMask))

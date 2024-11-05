@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UITitle : MonoBehaviour
 {
@@ -48,4 +49,5 @@ public class UITitle : MonoBehaviour
         AudioManager.Instance.PlaySFX(AudioManager.Sfx.Button);
         newSaveSlot.SetActive(false);
     }
+
 }

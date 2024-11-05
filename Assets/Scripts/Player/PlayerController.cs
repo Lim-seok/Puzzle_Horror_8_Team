@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameObject menuPanel;
+
     [Header("Movement")]
     public float moveSpeed;
     private Vector2 curMovementInput;
@@ -27,11 +29,11 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public bool canLook = true;
 
-    private Rigidbody rigidbody;
+    private Rigidbody _rigidbody;
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
     void Start()
     {
@@ -53,9 +55,9 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
         dir *= moveSpeed;
-        dir.y = rigidbody.velocity.y;
+        dir.y = GetComponent<Rigidbody>().velocity.y;
 
-        rigidbody.velocity = dir;   
+        GetComponent<Rigidbody>().velocity = dir;   
     }
     bool IsGrounded()
     {
@@ -81,7 +83,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started && IsGrounded())
         {
-            rigidbody.AddForce(Vector2.up * jumpForce, ForceMode.Impulse);
+            GetComponent<Rigidbody>().AddForce(Vector2.up * jumpForce, ForceMode.Impulse);
         }
     }
     public void OnMoveInput(InputAction.CallbackContext context)
@@ -100,6 +102,12 @@ public class PlayerController : MonoBehaviour
     {
         mouseDelta = context.ReadValue<Vector2>();
     }
+
+    public void OnMenuInput(InputAction.CallbackContext context)
+    {
+        menuPanel.SetActive(!menuPanel.activeSelf);
+    }
+
     void CameraLook()
     {
         camCurXRot += mouseDelta.y * lookSensitivity;
