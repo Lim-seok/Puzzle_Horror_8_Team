@@ -105,7 +105,19 @@ public class PlayerController : MonoBehaviour
 
     public void OnMenuInput(InputAction.CallbackContext context)
     {
-        menuPanel.SetActive(!menuPanel.activeSelf);
+        bool isActive = !menuPanel.activeSelf;
+        menuPanel.SetActive(isActive);
+
+        if (isActive)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     void CameraLook()
