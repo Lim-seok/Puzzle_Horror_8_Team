@@ -37,7 +37,7 @@ public class GameOverJumpScare : MonoBehaviour
         creatureObject.transform.position = playerTransform.position + playerTransform.TransformDirection(cameraOffset);
 
         Vector3 creaturePosition = creatureObject.transform.position;
-        creaturePosition.y -= 0.6f; 
+        creaturePosition.y -= 0.7f; 
         creatureObject.transform.position = creaturePosition;
 
         creatureObject.SetActive(true); 

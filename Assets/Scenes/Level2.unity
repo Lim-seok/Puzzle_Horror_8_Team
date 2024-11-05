@@ -3790,6 +3790,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1625844733069735828, guid: a235acfd5b24eb44caf325a86b64c19d, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1913205676}
+    - target: {fileID: 1625844733069735828, guid: a235acfd5b24eb44caf325a86b64c19d, type: 3}
+      propertyPath: randomAudioClips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625844733069735828, guid: a235acfd5b24eb44caf325a86b64c19d, type: 3}
+      propertyPath: randomAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: d1e086c09b2f6a646bf56123179b9e09, type: 3}
+    - target: {fileID: 1625844733069735828, guid: a235acfd5b24eb44caf325a86b64c19d, type: 3}
+      propertyPath: randomAudioClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: fc4fe71c1ba40984f87854f47a87e045, type: 3}
+    - target: {fileID: 1725529006667888896, guid: a235acfd5b24eb44caf325a86b64c19d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.816
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725529006667888896, guid: a235acfd5b24eb44caf325a86b64c19d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.431
+      objectReference: {fileID: 0}
+    - target: {fileID: 3165482016159070901, guid: a235acfd5b24eb44caf325a86b64c19d, type: 3}
+      propertyPath: m_Range
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3165482016159070901, guid: a235acfd5b24eb44caf325a86b64c19d, type: 3}
       propertyPath: m_Intensity
       value: 3
@@ -9523,6 +9551,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8333750071672196842, guid: 70c46d7b5e38f7c4e847a35af388fedb, type: 3}
   m_PrefabInstance: {fileID: 1904455508}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1913205676 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 892205921706780074, guid: a235acfd5b24eb44caf325a86b64c19d, type: 3}
+  m_PrefabInstance: {fileID: 870296820}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1918954216
 PrefabInstance:
