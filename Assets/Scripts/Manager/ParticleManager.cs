@@ -15,7 +15,7 @@ public class ParticleManager : Singleton<ParticleManager>
 
     private Dictionary<string, GameObject> particleDict = new Dictionary<string, GameObject>();
 
-    private void Awake()
+    private void Start()
     {
         foreach (var prefab in particlePrefabs)
         {
@@ -37,16 +37,10 @@ public class ParticleManager : Singleton<ParticleManager>
             {
                 particleSystem.Play();
             }
-            else
-            {
-                Debug.LogWarning($"파티클 시스템이 확인되지 않음.");
-            }
-            // 객체 반환 추가 필요없을때 파괴하기용
             return particleObj;
         }
         else
         {
-            Debug.LogWarning($"파티클 이름을 확인해주세요.");
             return null;
         }
     }
