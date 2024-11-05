@@ -4,7 +4,7 @@ using UnityEngine;
 public class SaveLoadManager : Singleton<SaveLoadManager>
 {
     private string saveFolderPath;
-    private int currentSlotIndex = 0;
+    public int currentSlotIndex = 0;
 
     private void Start()
     {

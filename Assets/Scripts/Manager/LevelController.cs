@@ -21,5 +21,16 @@ public class LevelController : Singleton<LevelController>
     {
         currentLevel++;
         SceneManager.LoadScene(currentLevel);
+        SaveData saveData = SaveLoadManager.Instance.LoadGame(SaveLoadManager.Instance.currentSlotIndex);
+
+        if (saveData != null)
+        {
+            SceneManager.LoadScene($"Level{saveData.level}");
+        }
+        else
+        {
+            currentLevel++;
+            SceneManager.LoadScene(currentLevel);
+        }
     }
 }
