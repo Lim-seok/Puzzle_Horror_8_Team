@@ -149,7 +149,6 @@ GameObject:
   - component: {fileID: 2491076215521586962}
   - component: {fileID: 1614462565210449570}
   - component: {fileID: 327691887520637877}
-  - component: {fileID: 585276113635591188}
   m_Layer: 7
   m_Name: LaserRelay
   m_TagString: Untagged
@@ -257,16 +256,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   relayLaserRenderer: {fileID: 7170668717136822572}
---- !u!114 &585276113635591188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7069972524712740675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 979ce3955617a0a479c45bf5ce100127, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 0a4a990cdc1aaf547b4d84fcfcee67ec, type: 2}

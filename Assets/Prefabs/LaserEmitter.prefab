@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4219573098917847370}
   - component: {fileID: 8985471812231336116}
   - component: {fileID: 6804262088260379239}
-  - component: {fileID: 8415783382258032895}
   - component: {fileID: 8343758941307863665}
   m_Layer: 7
   m_Name: LaserEmitter
@@ -122,19 +121,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserRenderer: {fileID: 8343758941307863665}
   maxLaserDistance: 10
---- !u!114 &8415783382258032895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3092975243016036993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 979ce3955617a0a479c45bf5ce100127, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 0a4a990cdc1aaf547b4d84fcfcee67ec, type: 2}
 --- !u!120 &8343758941307863665
 LineRenderer:
   serializedVersion: 2
