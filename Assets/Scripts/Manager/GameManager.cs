@@ -4,10 +4,12 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     public ButtonController[] buttons;
-    private int activeButtonCount = 3;
+    private int activeButtonCount = 5;
     private bool isCheckingWinOrLose = false;
 
     public GameOverJumpScare gameOverJumpScare;
+    public FrontBackOpener frontBackOpener;
+    public FrontBackOpener frontBackOpenerright;
 
     private void Start()
     {
@@ -19,6 +21,9 @@ public class GameManager : Singleton<GameManager>
         buttons[0].SetState(true);
         buttons[1].SetState(true);
         buttons[2].SetState(true);
+        buttons[3].SetState(true);
+        buttons[4].SetState(true);
+  
 
         //buttons[5].SetState(true);
         //buttons[7].SetState(true);
@@ -41,6 +46,8 @@ public class GameManager : Singleton<GameManager>
 
         if (activeButtonCount == buttons.Length)
         {
+            StartCoroutine(frontBackOpener.OpenDoor());
+
             Debug.Log("Å¬¸®¾î!");
         }
         else if (activeButtonCount == 0)

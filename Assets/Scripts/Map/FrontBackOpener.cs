@@ -18,6 +18,11 @@ public class FrontBackOpener : BaseOpener
         base.Start();
     }
 
+    public IEnumerator OpenDoor()
+    {
+        yield return StartCoroutine(OpenCoroutine());
+    }
+
     public override void SetProgress(float progress)
     {
         transform.localRotation = Quaternion.Euler(0.0f, defaultAngle + (sign * maxAngle * openProgress), 0.0f);
@@ -45,4 +50,6 @@ public class FrontBackOpener : BaseOpener
             yield return null;
         }
     }
+
+    
 }
