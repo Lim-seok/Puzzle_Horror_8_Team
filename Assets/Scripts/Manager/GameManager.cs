@@ -4,12 +4,13 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     public ButtonController[] buttons;
-    private int activeButtonCount = 5;
+    private int activeButtonCount = -3;
     private bool isCheckingWinOrLose = false;
 
     public GameOverJumpScare gameOverJumpScare;
     public FrontBackOpener frontBackOpener;
     public FrontBackOpener frontBackOpenerright;
+    public VignetteBlinker blinker;
 
     private void Start()
     {
@@ -18,11 +19,11 @@ public class GameManager : Singleton<GameManager>
             buttons[i].SetIndex(i);
         }
 
-        buttons[0].SetState(true);
-        buttons[1].SetState(true);
-        buttons[2].SetState(true);
-        buttons[3].SetState(true);
-        buttons[4].SetState(true);
+        //buttons[0].SetState(true);
+        //buttons[1].SetState(true);
+        //buttons[2].SetState(true);
+        //buttons[3].SetState(true);
+        //buttons[4].SetState(true);
   
 
         //buttons[5].SetState(true);
@@ -55,10 +56,9 @@ public class GameManager : Singleton<GameManager>
             if (gameOverJumpScare != null)
             {
                 gameOverJumpScare.TriggerGameOver();
-            }
-            else
-            {
-                Debug.Log("게임 오버!");
+                blinker.BlinkVignette(5f);
+
+                // TODO :: 메인메뉴보내기
             }
             
 
