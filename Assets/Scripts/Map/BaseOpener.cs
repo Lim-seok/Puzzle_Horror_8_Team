@@ -19,17 +19,17 @@ public class BaseOpener : MonoBehaviour
 
     protected virtual void Start()
     {
-        if (!isInitialOpened)
+        if (isInitialOpened)
         {
-            controller.OnActivateEvent += Open;
-            controller.OnDeactivateEvent += Close;
+            controller.OnActivateEvent += Close;
+            controller.OnDeactivateEvent += Open;
             openProgress = 1.0f;
         }
 
         else
         {
-            controller.OnActivateEvent += Close;
-            controller.OnDeactivateEvent += Open;
+            controller.OnActivateEvent += Open;
+            controller.OnDeactivateEvent += Close;
             openProgress = 0.0f;
         }
 
