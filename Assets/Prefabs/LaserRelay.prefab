@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8865218947398766358}
   - component: {fileID: 7170668717136822572}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 2491076215521586962}
   - component: {fileID: 1614462565210449570}
   - component: {fileID: 327691887520637877}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: LaserRelay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
