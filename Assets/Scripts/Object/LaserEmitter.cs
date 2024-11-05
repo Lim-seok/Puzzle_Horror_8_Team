@@ -64,6 +64,12 @@ public class LaserEmitter : MonoBehaviour
 
         else
         {
+            if (rayHitComponent != null)
+            {
+                rayHitComponent.OnLaserMiss();
+                rayHitComponent = null;
+            }
+
             laserRenderer.SetPosition(0, start);
             laserRenderer.SetPosition(1, start + laserDirection * maxLaserDistance);
         }
