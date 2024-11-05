@@ -2,7 +2,7 @@ using Cinemachine;
 using System.Collections;
 using UnityEngine;
 
-public class JumpScareEvent : MonoBehaviour
+public class JumpScare : MonoBehaviour
 {
     public Animator creatureAnimator;
     public Transform creatureTransform;
@@ -38,6 +38,7 @@ public class JumpScareEvent : MonoBehaviour
 
     public void TriggerJumpScare()
     {
+        
         if (isJumpScareActive) return;
 
         isJumpScareActive = true;

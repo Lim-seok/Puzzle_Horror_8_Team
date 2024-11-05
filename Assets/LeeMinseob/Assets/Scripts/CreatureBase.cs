@@ -16,7 +16,7 @@ public class CreatureBase : MonoBehaviour
     public float runSpeed;
 
     [Header("AI")]
-    protected AIState aiState;
+    public AIState aiState;
     public float detectDistance;
 
     [Header("Wandering")]

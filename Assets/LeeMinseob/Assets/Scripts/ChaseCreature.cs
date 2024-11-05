@@ -4,7 +4,7 @@ using UnityEngine.AI;
 public class ChaseCreature : CreatureBase
 {
     private NavMeshAgent agent;
-    public JumpScareEvent jumpScareEvent;
+    public JumpScare jumpScare;
     private Collider attackCollider;
 
 
@@ -113,7 +113,8 @@ public class ChaseCreature : CreatureBase
                 animator.speed = 1;
                 animator.SetTrigger("Attack");
 
-                jumpScareEvent.TriggerJumpScare();
+                jumpScare.TriggerJumpScare();
+                GetComponent<ChaseCreatureSound>().PlayJumpScareSound(0);
 
                 attackCollider.enabled = true;
                 Invoke("DisableAttackCollider", 0.2f);
@@ -134,7 +135,7 @@ public class ChaseCreature : CreatureBase
         {
             agent.isStopped = true;
             SetState(AIState.Attacking);
-            jumpScareEvent.TriggerJumpScare();
+            jumpScare.TriggerJumpScare();
         }
     }
 
