@@ -51,7 +51,7 @@ public class Interaction : MonoBehaviour
         }
         if (heldItem != null)
         {
-            promptText.text = "����\nEŰ�� ��������.";
+            promptText.text = "E키: 옮기기.";
             promptText.gameObject.SetActive(true);
         }
     }
