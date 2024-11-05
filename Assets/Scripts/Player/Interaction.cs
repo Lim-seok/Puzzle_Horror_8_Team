@@ -58,7 +58,7 @@ public class Interaction : MonoBehaviour
 
     private void PerformRaycast()
     {
-        Ray ray = GetComponent<Camera>().ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+        Ray ray = _camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, maxCheckDistance, layerMask))
