@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ItemObject : MonoBehaviour, IInteractable
+public class ItemObject : PuzzleBase, IInteractable
 {
     public ItemData data;
     private Interaction interaction;
@@ -14,12 +14,12 @@ public class ItemObject : MonoBehaviour, IInteractable
 
     void Start()
     {
-        interaction = FindObjectOfType<Interaction>();
+        interaction = FindAnyObjectByType<Interaction>();
         buttonController = GetComponent<ButtonController>();
     }
     public string GetInteractPrompt()
     {
-        string str = $"{data.displayName}\n{data.description}";
+        string str = $"{data.displayName}: {data.description}";
         return str;
     }
 
@@ -68,4 +68,9 @@ public class ItemObject : MonoBehaviour, IInteractable
         // 오브젝트를 Y축 기준으로 회전
         transform.rotation = Quaternion.Euler(0f, currentRotation, 0f);
     }
+    public void InteractSwitch()
+    {
+        SetPuzzleState(!CheckState());
+    }
 }
+
