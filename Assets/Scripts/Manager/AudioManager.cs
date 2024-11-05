@@ -18,7 +18,11 @@ public class AudioManager : Singleton<AudioManager>
     AudioSource[] sfxPlayers;
     int channelIndex;
 
-    public enum Sfx { Button }
+    public enum Sfx 
+    {
+        Button, 
+        FlickerLightSound 
+    }
 
     protected override void Awake()
     {
