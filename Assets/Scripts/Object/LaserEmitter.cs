@@ -34,7 +34,7 @@ public class LaserEmitter : MonoBehaviour
         RaycastHit hit;
         Vector3 start = transform.position;
 
-        if (Physics.Raycast(start, laserDirection, out hit, 10f))
+        if (Physics.Raycast(start, laserDirection, out hit, maxLaserDistance))
         {
             laserRenderer.SetPosition(0, start);
             laserRenderer.SetPosition(1, hit.point);
