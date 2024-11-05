@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 7971825309937873566}
   - component: {fileID: 3674758539395296977}
   - component: {fileID: 5250786102202322488}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: KeyCube
   m_TagString: KeyCube
   m_Icon: {fileID: 0}
