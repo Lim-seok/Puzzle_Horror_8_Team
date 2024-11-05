@@ -6,36 +6,35 @@ using TMPro;
 public class GameTimer : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
-    public float gameTime = 60f;
-    private float currentTime;
-    private bool isGameOver = false;
-
-    void Start()
-    {
-        currentTime = gameTime;
-        UpdateTimerDisplay();
-    }
-
+    public TextMeshProUGUI gameOverText;
+    private float currentTime = 60f;
+    
     void Update()
     {
-         currentTime -= Time.deltaTime;
-         UpdateTimerDisplay();
+        if (currentTime > 0)
+        {
+            // 시간 감소
+            currentTime -= Time.deltaTime;
 
-         if (currentTime <= 0)
-         {
+            // 시간이 0 미만으로 내려가지 않도록 함
+            if (currentTime < 0)
+            {
+                currentTime = 0;
+            }
+
+            // 타이머 텍스트 업데이트
+            timerText.text = currentTime.ToString("F2");
+        }
+        if (currentTime <= 0)
+        {
              EndGame();
-         }
+        }
+
     }
 
-    void UpdateTimerDisplay()
-    {
-        if (currentTime < 0)
-            currentTime = 0;
-
-        timerText.text = currentTime.ToString("F2");
-    }
     void EndGame()
     {
-        GameOver.Instance.SetGameOver(true);
+        gameOverText.gameObject.SetActive(true);
+        SceneManager.LoadScene("TitleScene");
     }
 }
