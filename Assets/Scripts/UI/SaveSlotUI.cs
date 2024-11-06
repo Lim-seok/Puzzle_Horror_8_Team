@@ -68,6 +68,7 @@ public class SaveSlotUI : MonoBehaviour
 
         LevelController.Instance.currentLevel = 1;
         SceneManager.LoadScene("Level1");
+        PuzzleManager.Instance.InitializePuzzle();
     }
 
     public void DeleteSlot(int slot)
@@ -81,5 +82,6 @@ public class SaveSlotUI : MonoBehaviour
     {
         LevelController.Instance.currentLevel = saveData.level;
         SceneManager.LoadScene($"Level{saveData.level}");
+        PuzzleManager.Instance.InitializePuzzle();
     }
 }
