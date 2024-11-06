@@ -3,12 +3,11 @@ using UnityEngine;
 
 public class SaveLoadManager : Singleton<SaveLoadManager>
 {
-    private string saveFolderPath;
+    private string saveFolderPath = @"C:\PuzzleHorror\Saves";
     public int currentSlotIndex = 0;
 
     private void Start()
     {
-        saveFolderPath = @"C:\PuzzleHorror\Saves";
         if (!Directory.Exists(saveFolderPath))
         {
             Directory.CreateDirectory(saveFolderPath);
