@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : SceneSingleton<GameManager>
 {
     public ButtonController[] buttons;
     private int activeButtonCount = 5;
