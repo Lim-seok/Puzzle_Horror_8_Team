@@ -1330,7 +1330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgmClip: {fileID: 8300000, guid: c2c392d4ec07d40528432c3bda4bc466, type: 3}
-  bgmVolume: 0.5
+  bgmVolume: 0.1
   sfxClips:
   - {fileID: 8300000, guid: bc33de580807419469a0a814c89f99c3, type: 3}
   - {fileID: 8300000, guid: 9d4d6bf5a98b1bc44897de5bdd928750, type: 3}
