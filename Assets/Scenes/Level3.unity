@@ -2024,9 +2024,9 @@ GameObject:
   - component: {fileID: 51583046}
   - component: {fileID: 51583048}
   - component: {fileID: 51583047}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WallNorthLayer
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8436,9 +8436,9 @@ GameObject:
   - component: {fileID: 208026243}
   - component: {fileID: 208026245}
   - component: {fileID: 208026244}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WallEastLayer
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71218,9 +71218,9 @@ GameObject:
   - component: {fileID: 1654624502}
   - component: {fileID: 1654624504}
   - component: {fileID: 1654624503}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WallWestLayer
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76963,9 +76963,9 @@ GameObject:
   - component: {fileID: 1786420093}
   - component: {fileID: 1786420095}
   - component: {fileID: 1786420094}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WallSouthLayer
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92694,7 +92694,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1554099836354792696, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.27
+      value: -5.22
       objectReference: {fileID: 0}
     - target: {fileID: 1554099836354792696, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
       propertyPath: m_LocalPosition.y
@@ -92702,7 +92702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1554099836354792696, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.61
+      value: -8.87
       objectReference: {fileID: 0}
     - target: {fileID: 1554099836354792696, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
       propertyPath: m_LocalRotation.w
@@ -92738,6 +92738,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2004246856261641839, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
       propertyPath: walkSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2004246856261641839, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
+      propertyPath: attackDistance
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2055128120448390852, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}

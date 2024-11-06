@@ -109,6 +109,7 @@ public class ChaseCreature : CreatureBase
             agent.isStopped = true;
             if (Time.time - lastAttackTime > attackRate)
             {
+                IsObstacleInPath();
                 lastAttackTime = Time.time;
                 animator.speed = 1;
                 animator.SetTrigger("Attack");
@@ -151,5 +152,21 @@ public class ChaseCreature : CreatureBase
         NavMeshHit hit;
         NavMesh.SamplePosition(transform.position + (Random.insideUnitSphere * Random.Range(minWanderDistance, maxWanderDistance)), out hit, maxWanderDistance, NavMesh.AllAreas);
         return hit.position;
+    }
+
+    private bool IsObstacleInPath()
+    {
+        Ray ray = new Ray(transform.position, (CharacterManager.Instance.Player.transform.position - transform.position).normalized);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, attackDistance))
+        {
+            if (hit.collider.CompareTag("Wall"))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
