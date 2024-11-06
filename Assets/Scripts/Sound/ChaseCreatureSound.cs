@@ -40,6 +40,8 @@ public class ChaseCreatureSound : MonoBehaviour
 
     private void PlayDetectionBGM()
     {
+        if (bgmAudioSource.isPlaying) return;
+
         bgmAudioSource.clip = BGMClip;
         bgmAudioSource.loop = true;
         bgmAudioSource.Play();
@@ -83,7 +85,7 @@ public class ChaseCreatureSound : MonoBehaviour
 
     public void PlayJumpScareSound(int clipIndex)
     {
-        if (jumpScareSoundClip.Length <= clipIndex) return;
+        if (jumpScareSoundClip.Length <= clipIndex || jumpScareAudioSource.isPlaying) return;
 
         jumpScareAudioSource.clip = jumpScareSoundClip[clipIndex];
         jumpScareAudioSource.Play();
