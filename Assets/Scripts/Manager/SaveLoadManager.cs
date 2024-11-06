@@ -24,8 +24,13 @@ public class SaveLoadManager : Singleton<SaveLoadManager>
 
     public void SaveCurrentProgress(int level)
     {
+        SaveData currentData = LoadGame(currentSlotIndex);
+
+        string playerName = currentData.playerName;
+
         SaveData data = new SaveData
         {
+            playerName = playerName,
             level = level
         };
 
