@@ -24,6 +24,9 @@ public class EndingTrapped : MonoBehaviour
     public virtual void OnEndingTrigger()
     {
         fader = Instantiate(fadeScreen, targetParent).GetComponent<ScreenFader>();
+
+        AudioManager.Instance.PlaySFX(AudioManager.Sfx.Ending);
+
         fader.SetTime(fadeEndTime);
         fader.InitailizeFader(true);
         Invoke("CallFadeIn", fadeStartTime);
