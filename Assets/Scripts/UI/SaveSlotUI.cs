@@ -66,6 +66,7 @@ public class SaveSlotUI : MonoBehaviour
         nameEntryPanel.SetActive(false);
         LoadSlotInfo();
 
+        LevelController.Instance.currentLevel = 1;
         SceneManager.LoadScene("Level1");
     }
 
