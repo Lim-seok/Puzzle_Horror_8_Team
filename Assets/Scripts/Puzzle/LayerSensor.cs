@@ -14,7 +14,7 @@ public class LayerSensor : PuzzleBase
 
     private void OnTriggerExit(Collider other)
     {
-        if ((targetLayers & (1 << other.gameObject.layer)) != 0) ;
+        if ((targetLayers & (1 << other.gameObject.layer)) != 0)
         {
             SetPuzzleState(false);
         }
