@@ -51,10 +51,16 @@ public class DoorObject : MonoBehaviour, IInteractable
     public void OnInteract()
     {
         if (isOpened)
+        {
             Close();
+            AudioManager.Instance.PlaySFX(AudioManager.Sfx.CloseDoor);
+        }
 
         else
+        {
             Open();
+            AudioManager.Instance.PlaySFX(AudioManager.Sfx.OpenDoor);
+        }
     }
 
     public virtual void SetProgress(float progress)
