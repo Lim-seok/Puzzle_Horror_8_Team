@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3377131177405085765}
   - component: {fileID: 8650956204120621955}
   - component: {fileID: 8924441876132876788}
-  - component: {fileID: 5762170349870455617}
   - component: {fileID: 6005556825733068659}
   m_Layer: 7
   m_Name: PuzzleInteractSwitch
@@ -49,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetKeys:
-  - switch1
+  - keys: []
 --- !u!114 &8924441876132876788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,21 +65,6 @@ MonoBehaviour:
   - {fileID: 6552005611445932596}
   controller: {fileID: 8650956204120621955}
   isInitialOn: 1
---- !u!114 &5762170349870455617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 304039627167794315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca761b5068e4f7b4aa2870141acabc88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cell:
-    key: switch1
-    state: 0
 --- !u!65 &6005556825733068659
 BoxCollider:
   m_ObjectHideFlags: 0
