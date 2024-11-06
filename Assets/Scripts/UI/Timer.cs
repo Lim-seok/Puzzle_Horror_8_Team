@@ -32,7 +32,7 @@ public class GameTimer : MonoBehaviour
 
     }
 
-    void EndGame()
+    public void EndGame()
     {
         gameOverText.gameObject.SetActive(true);
         SceneManager.LoadScene("TitleScene");

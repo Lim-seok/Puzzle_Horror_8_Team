@@ -109,7 +109,7 @@ public class Interaction : MonoBehaviour
             heldItem = item;
 
             Rigidbody rb = item.GetComponent<Rigidbody>();
-            Vector3 holdPosition = transform.position + transform.forward * 1.2f + Vector3.up * 1.5f;
+            Vector3 holdPosition = transform.position + transform.forward * 1.2f + Vector3.up * 0.3f - transform.right * 1.2f;
             item.transform.position = holdPosition;
 
             fixedJoint = gameObject.AddComponent<FixedJoint>();
@@ -122,6 +122,9 @@ public class Interaction : MonoBehaviour
     {
         if (heldItem != null)
         {
+            Vector3 dropPosition = transform.position + transform.forward * 1.2f + Vector3.up * 0.8f;
+            heldItem.transform.position = dropPosition;
+
             if (fixedJoint != null)
             {
                 Destroy(fixedJoint);
