@@ -21,7 +21,8 @@ public class AudioManager : Singleton<AudioManager>
     {
         Button,
         Beat,
-        Hit
+        Hit,
+        Ending
     }
 
     protected override void Awake()

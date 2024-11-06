@@ -1335,8 +1335,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: bc33de580807419469a0a814c89f99c3, type: 3}
   - {fileID: 8300000, guid: 9d4d6bf5a98b1bc44897de5bdd928750, type: 3}
   - {fileID: 8300000, guid: 426da3f636efa07458c77730fdd7a1f1, type: 3}
+  - {fileID: 8300000, guid: d24441f1efd0be146b13778aca52fa0a, type: 3}
   sfxVolume: 0.5
-  channels: 3
+  channels: 4
 --- !u!4 &563109464
 Transform:
   m_ObjectHideFlags: 0
