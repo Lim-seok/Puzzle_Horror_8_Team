@@ -4,7 +4,7 @@ using UnityEngine;
 public class GameManager : SceneSingleton<GameManager>
 {
     public ButtonController[] buttons;
-    private int activeButtonCount = 5;
+    private int activeButtonCount = 3;
     private bool isCheckingWinOrLose = false;
 
     public GameOverJumpScare gameOverJumpScare;
@@ -19,15 +19,10 @@ public class GameManager : SceneSingleton<GameManager>
             buttons[i].SetIndex(i);
         }
 
-        buttons[0].SetState(true);
         buttons[1].SetState(true);
         buttons[2].SetState(true);
-        buttons[3].SetState(true);
-        buttons[4].SetState(true);
+        buttons[7].SetState(true);
 
-
-        //buttons[5].SetState(true);
-        //buttons[7].SetState(true);
     }
 
     public void UpdateButtonCount(bool isActivated)
