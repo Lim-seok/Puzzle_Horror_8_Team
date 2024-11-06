@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class LevelController : Singleton<LevelController>
 {
     [SerializeField] private string[] LevelArray;
-    private int currentLevel;
+    public int currentLevel;
 
     private void Start()
     {
