@@ -23,10 +23,9 @@ public class VignetteBlinker : MonoBehaviour
         float elapsedTime = 0f;
         float pulseSpeed = 7f;
 
-        AudioManager.Instance.PlaySFX(AudioManager.Sfx.Beat);
-
         while (elapsedTime < duration)
         {
+            AudioManager.Instance.PlaySFX(AudioManager.Sfx.Beat);
             vignette.intensity.value = Mathf.Lerp(0f, 0.5f, Mathf.Sin(elapsedTime * pulseSpeed));
             elapsedTime += Time.deltaTime;
             yield return null;

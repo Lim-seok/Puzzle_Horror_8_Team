@@ -1,25 +1,19 @@
+using System.Collections;
 using UnityEngine;
 
 public class SceneTimerEffectController : MonoBehaviour
 {
     public VignetteBlinker blinker;
 
-    private float sceneTimer = 0f;
-    public float effectTriggerTime = 5f;
-
     private void Start()
     {
-        sceneTimer = 0f;
+        StartCoroutine(StartEffectAfterDelay(5f));
     }
 
-    private void Update()
+    private IEnumerator StartEffectAfterDelay(float delay)
     {
-        sceneTimer += Time.deltaTime;
-
-        if (sceneTimer >= effectTriggerTime)
-        {
-            TriggerEffect();
-        }
+        yield return new WaitForSeconds(delay);
+        TriggerEffect();
     }
 
     private void TriggerEffect()
