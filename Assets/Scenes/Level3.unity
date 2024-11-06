@@ -55202,9 +55202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161bab5819c793f4b82a032009e7c1a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelArray:
-  - MainScene
-  - TestScene1
+  currentLevel: 0
 --- !u!4 &1306173112
 Transform:
   m_ObjectHideFlags: 0
@@ -92139,6 +92137,10 @@ PrefabInstance:
       propertyPath: walkSpeed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2055128120448390852, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5493356177710295310, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
       propertyPath: m_Name
       value: BookHeadMonster_withBlood
@@ -92151,6 +92153,14 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1926563903}
+    - target: {fileID: 9138030245595060638, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
+      propertyPath: jumpScareSoundClip.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138030245595060638, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
+      propertyPath: jumpScareSoundClip.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: fbcfbb84939fa3243bf5170adb44384e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

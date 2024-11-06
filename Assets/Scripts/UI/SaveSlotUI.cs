@@ -78,6 +78,7 @@ public class SaveSlotUI : MonoBehaviour
 
     private void StartSavedGame(SaveData saveData)
     {
+        LevelController.Instance.currentLevel = saveData.level;
         SceneManager.LoadScene($"Level{saveData.level}");
     }
 }

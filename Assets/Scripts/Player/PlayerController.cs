@@ -59,33 +59,7 @@ public class PlayerController : MonoBehaviour
 
         GetComponent<Rigidbody>().velocity = dir;   
     }
-    bool IsGrounded()
-    {
-        Ray[] rays = new Ray[4]
-        {
-            new Ray(transform.position + (transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
-            new Ray(transform.position + (-transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
-            new Ray(transform.position + (transform.right * 0.2f) + (transform.up * 0.01f), Vector3.down),
-            new Ray(transform.position + (-transform.right * 0.2f) +(transform.up * 0.01f), Vector3.down)
-        };
 
-        for (int i = 0; i < rays.Length; i++)
-        {
-            if (Physics.Raycast(rays[i], 1.2f, groundLayerMask))
-            { 
-                return true;
-            }
-        }
-
-        return false;
-    }
-    public void OnJumpInput(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Started && IsGrounded())
-        {
-            GetComponent<Rigidbody>().AddForce(Vector2.up * jumpForce, ForceMode.Impulse);
-        }
-    }
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
@@ -96,8 +70,8 @@ public class PlayerController : MonoBehaviour
         {
             curMovementInput = Vector2.zero;
         }
-
     }
+
     public void OnLookInput(InputAction.CallbackContext context)
     {
         mouseDelta = context.ReadValue<Vector2>();
@@ -119,7 +93,6 @@ public class PlayerController : MonoBehaviour
             canLook = true;
         }
     }
-
     void CameraLook()
     {
         camCurXRot += mouseDelta.y * lookSensitivity;
@@ -135,7 +108,4 @@ public class PlayerController : MonoBehaviour
             spotLight.enabled = !spotLight.enabled;
         }
     }
-
-
-
 }
