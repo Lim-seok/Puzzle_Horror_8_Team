@@ -42,6 +42,7 @@ public class EndingTrapped : MonoBehaviour
     protected void GotoTitle()
     {
         Cursor.lockState = CursorLockMode.None;
+        PuzzleManager.Instance.InitializePuzzle();
         SceneManager.LoadScene("TitleScene");
     }
 }
