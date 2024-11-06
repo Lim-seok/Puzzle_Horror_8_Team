@@ -12,6 +12,8 @@ public class EndingEscaped : EndingTrapped
         fader = targetObj.GetComponent<ScreenFader>();
         raiser = targetObj.GetComponentInChildren<TextRaiser>();
 
+        AudioManager.Instance.PlaySFX(AudioManager.Sfx.Ending);
+
         fader.SetTime(fadeEndTime);
         fader.InitailizeFader(true);
         Invoke("CallFadeIn", fadeStartTime);
