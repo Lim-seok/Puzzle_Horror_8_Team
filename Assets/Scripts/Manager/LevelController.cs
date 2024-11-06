@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class LevelController : Singleton<LevelController>
 {
     [SerializeField] private string[] LevelArray;
@@ -19,18 +20,9 @@ public class LevelController : Singleton<LevelController>
 
     public void NextLevel()
     {
-        currentLevel++;
-        SceneManager.LoadScene(currentLevel);
-        SaveData saveData = SaveLoadManager.Instance.LoadGame(SaveLoadManager.Instance.currentSlotIndex);
-
-        if (saveData != null)
-        {
-            SceneManager.LoadScene($"Level{saveData.level}");
-        }
-        else
-        {
             currentLevel++;
             SceneManager.LoadScene(currentLevel);
-        }
+            SaveLoadManager.Instance.SaveCurrentProgress(currentLevel);
+
     }
 }

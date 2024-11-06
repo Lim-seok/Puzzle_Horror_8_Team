@@ -92313,18 +92313,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1554099836354792696, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1554099836354792696, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1554099836354792696, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1554099836354792696, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
       propertyPath: m_LocalPosition.x
       value: 29.39
       objectReference: {fileID: 0}
@@ -92366,99 +92354,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2004246856261641839, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
       propertyPath: runSpeed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2004246856261641839, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: walkSpeed
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2004246856261641839, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: detectDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3023203528080804642, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3023203528080804642, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: m_Range
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3023203528080804642, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: m_Color.b
-      value: 0.990566
-      objectReference: {fileID: 0}
-    - target: {fileID: 3023203528080804642, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: m_Color.g
-      value: 0.990566
-      objectReference: {fileID: 0}
-    - target: {fileID: 3023203528080804642, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: m_Color.r
-      value: 0.990566
-      objectReference: {fileID: 0}
-    - target: {fileID: 3023203528080804642, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: m_Enabled
+      propertyPath: walkSpeed
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3023203528080804642, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: m_Intensity
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3023203528080804642, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: m_SpotAngle
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 3023203528080804642, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: m_InnerSpotAngle
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5493356177710295310, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
       propertyPath: m_Name
       value: BookHeadMonster_withBlood
-      objectReference: {fileID: 0}
-    - target: {fileID: 5493356177710295310, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335960663984230000, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: m_Acceleration
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335960663984230000, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: m_AngularSpeed
-      value: 1080
-      objectReference: {fileID: 0}
-    - target: {fileID: 8129432729454726169, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.041
-      objectReference: {fileID: 0}
-    - target: {fileID: 8129432729454726169, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.301
-      objectReference: {fileID: 0}
-    - target: {fileID: 8129432729454726169, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8129432729454726169, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8129432729454726169, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.99820054
-      objectReference: {fileID: 0}
-    - target: {fileID: 8129432729454726169, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.059964776
-      objectReference: {fileID: 0}
-    - target: {fileID: 8129432729454726169, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -6.876
-      objectReference: {fileID: 0}
-    - target: {fileID: 8129432729454726169, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 8453459572038959961, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
       propertyPath: playerTransform
@@ -92468,14 +92372,6 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1926563903}
-    - target: {fileID: 9138030245595060638, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: jumpScareSoundClip.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9138030245595060638, guid: ac1dd246aff4503499610ca6ab47e815, type: 3}
-      propertyPath: jumpScareSoundClip.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
