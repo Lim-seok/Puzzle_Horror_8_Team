@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class JumpScare : MonoBehaviour
 {
@@ -77,6 +78,10 @@ public class JumpScare : MonoBehaviour
 
         playerController.enabled = true; 
         isJumpScareActive = false;
+
+        yield return new WaitForSeconds(3.5f);
+
+        SceneManager.LoadScene("TitleScene");
 
     }
 
