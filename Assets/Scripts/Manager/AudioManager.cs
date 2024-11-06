@@ -21,7 +21,8 @@ public class AudioManager : Singleton<AudioManager>
     public enum Sfx 
     {
         Button, 
-        FlickerLightSound 
+        Beat,
+        Hit
     }
 
     protected override void Awake()
