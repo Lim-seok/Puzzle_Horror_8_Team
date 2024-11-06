@@ -20,6 +20,7 @@ public class FrontBackOpener : BaseOpener
 
     public IEnumerator OpenDoor()
     {
+        
         yield return StartCoroutine(OpenCoroutine());
     }
 
@@ -31,6 +32,7 @@ public class FrontBackOpener : BaseOpener
 
     protected override IEnumerator OpenCoroutine()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Sfx.ClearDoor);
         while (openProgress < 1.0f)
         {
             openProgress += openSpeed * Time.deltaTime;
