@@ -10,5 +10,6 @@ public class LevelController : Singleton<LevelController>
         currentLevel++;
         SaveLoadManager.Instance.SaveCurrentProgress(currentLevel);
         SceneManager.LoadScene($"Level{currentLevel}");
+        PuzzleManager.Instance.InitializePuzzle();
     }
 }
