@@ -68,6 +68,15 @@ public class AudioManager : Singleton<AudioManager>
         }
     }
 
+    public void StopBGM()
+    {
+        if (bgmPlayer != null && bgmPlayer.isPlaying)
+        {
+            bgmPlayer.Stop();
+            bgmPlayer.clip = null;
+        }
+    }
+
     public void PlaySFX(Sfx sfx)
     {
         for (int index = 0; index < sfxPlayers.Length; index++)

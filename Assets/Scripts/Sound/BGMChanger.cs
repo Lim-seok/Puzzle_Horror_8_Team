@@ -18,6 +18,10 @@ public class BGMChanger : MonoBehaviour
         {
             AudioManager.Instance.PlayBGM(newBgmClip);
         }
+        else
+        {
+            AudioManager.Instance.StopBGM();
+        }
 
     }
 }
