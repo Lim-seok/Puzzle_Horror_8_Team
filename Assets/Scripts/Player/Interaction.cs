@@ -51,7 +51,7 @@ public class Interaction : MonoBehaviour
         }
         if (heldItem != null)
         {
-            promptText.text = "E키: 옮기기.";
+            promptText.text = "E키: 옮기기";
             promptText.gameObject.SetActive(true);
         }
     }
@@ -109,7 +109,7 @@ public class Interaction : MonoBehaviour
             heldItem = item;
 
             Rigidbody rb = item.GetComponent<Rigidbody>();
-            Vector3 holdPosition = transform.position + transform.forward + Vector3.up;
+            Vector3 holdPosition = transform.position + transform.forward * 1.2f + Vector3.up * 1.5f;
             item.transform.position = holdPosition;
 
             fixedJoint = gameObject.AddComponent<FixedJoint>();
