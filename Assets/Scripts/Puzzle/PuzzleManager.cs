@@ -39,4 +39,9 @@ public class PuzzleManager : Singleton<PuzzleManager>
     {
         return puzzleSwitch[key];
     }
+
+    public void InitializePuzzle()
+    {
+        puzzleSwitch.Clear();
+    }
 }
