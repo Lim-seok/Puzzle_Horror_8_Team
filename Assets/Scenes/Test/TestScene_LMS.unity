@@ -16269,7 +16269,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 760028498060738951}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.28, y: -0.39, z: -5.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -16277,7 +16277,7 @@ Transform:
   - {fileID: 8228765841121618598}
   - {fileID: 7484891934472427963}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1897322887307424682
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16332,6 +16332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b64dbae9c84be50438bffb3a43f55b41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuPanel: {fileID: 0}
   moveSpeed: 5
   jumpForce: 20
   groundLayerMask:
@@ -16584,6 +16585,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: a845e86d-f1da-4c0e-bf13-2da3ae6be93d
     m_ActionName: Player/Interaction[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3240edcd-0498-4690-9afa-0487ee084f25
+    m_ActionName: Player/Menu[/Keyboard/f1]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
