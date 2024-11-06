@@ -14,6 +14,7 @@ public class GameOverJumpScare : MonoBehaviour
     private bool isGameOverActive = false;
     private SkinnedMeshRenderer[] skinnedMeshRenderers;
     private Canvas[] uiCanvases;
+    private GameTimer gameTimer;
 
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class GameOverJumpScare : MonoBehaviour
         creatureObject.SetActive(false);
 
         uiCanvases = FindObjectsOfType<Canvas>();
+        gameTimer = FindObjectOfType<GameTimer>();
     }
 
     public void TriggerGameOver()
@@ -67,6 +69,10 @@ public class GameOverJumpScare : MonoBehaviour
 
         mainCamera.transform.position = targetPosition;
         mainCamera.transform.rotation = targetRotation;
+
+        yield return new WaitForSeconds(8.0f);
+
+        gameTimer.EndGame();
     }
 
 
