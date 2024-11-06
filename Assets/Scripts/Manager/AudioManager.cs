@@ -56,8 +56,19 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlaySFX(Sfx sfx)
     {
-        sfxPlayers[(int)sfx].clip = sfxClips[(int)sfx];
-        sfxPlayers[(int)sfx].PlayOneShot(sfxPlayers[(int)sfx].clip);
+        // sfxPlayers 배열을 순회
+        for (int index = 0; index < sfxPlayers.Length; index++)
+        {
+            // 현재 채널 인덱스부터 시작하여 순환적으로 인덱스 계산
+            int loopIndex = (index + channelIndex) % sfxPlayers.Length;
+            // 현재 오디오 플레이어가 재생 중이면 다음 플레이어로 넘어감
+            if (sfxPlayers[loopIndex].isPlaying)
+                continue;
+            // 사용 가능한 오디오 플레이어를 찾으면 해당 SFX 클립을 설정하고 재생
+            sfxPlayers[loopIndex].clip = sfxClips[(int)sfx];
+            sfxPlayers[loopIndex].PlayOneShot(sfxPlayers[loopIndex].clip);
+            break; // 재생을 시작했으므로 루프 종료
+        }
     }
     public void SetBGMVolume(float volume)
     {
