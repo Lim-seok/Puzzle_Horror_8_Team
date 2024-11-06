@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +10,11 @@ public class UITitle : MonoBehaviour
     public GameObject settingPanel;
     public GameObject savePanel;
     public GameObject newSaveSlot;
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+    }
 
     public void OnSettingButtonPressed()
     {
