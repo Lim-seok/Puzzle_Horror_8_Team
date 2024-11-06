@@ -25,6 +25,6 @@ public class SceneTimerEffectController : MonoBehaviour
     private void TriggerEffect()
     {
         AudioManager.Instance.PlaySFX(AudioManager.Sfx.Hit);
-        blinker.BlinkVignette(3f);
+        blinker.BlinkVignette(5f);
     }
 }
