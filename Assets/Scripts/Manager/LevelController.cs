@@ -15,14 +15,18 @@ public class LevelController : Singleton<LevelController>
     public void LoadLevel()
     {
         SaveData saveData = SaveLoadManager.Instance?.LoadGame(SaveLoadManager.Instance.currentSlotIndex);
-        currentLevel = saveData.level;
+        currentLevel = saveData?.level ?? 0; 
         SceneManager.LoadScene(LevelArray[currentLevel]);
     }
 
     public void NextLevel()
     {
         currentLevel++;
-        SceneManager.LoadScene($"Level{currentLevel}");
+        if (currentLevel < LevelArray.Length)
+        {
+            SceneManager.LoadScene(LevelArray[currentLevel]);
+            SaveLoadManager.Instance?.SaveCurrentProgress(currentLevel);
+        }
 
     }
 }
