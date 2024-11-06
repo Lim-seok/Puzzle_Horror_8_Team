@@ -9,20 +9,20 @@ public class LevelController : Singleton<LevelController>
 
     private void Start()
     {
-        currentLevel = 0;
+        LoadLevel();
     }
 
-    public void LoadLevel(int level)
+    public void LoadLevel()
     {
-        currentLevel = level;
-        SceneManager.LoadScene(level);
+        SaveData saveData = SaveLoadManager.Instance?.LoadGame(SaveLoadManager.Instance.currentSlotIndex);
+        currentLevel = saveData.level;
+        SceneManager.LoadScene(LevelArray[currentLevel]);
     }
 
     public void NextLevel()
     {
-            currentLevel++;
-            SceneManager.LoadScene(currentLevel);
-            SaveLoadManager.Instance.SaveCurrentProgress(currentLevel);
+        currentLevel++;
+        SceneManager.LoadScene($"Level{currentLevel}");
 
     }
 }
