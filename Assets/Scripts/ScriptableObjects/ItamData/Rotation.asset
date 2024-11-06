@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec0add3b165befb45a33d483a7911c5a, type: 3}
   m_Name: Rotation
   m_EditorClassIdentifier: 
-  displayName: "E\uD0A4"
+  displayName: E
   description: "\uB3CC\uB9AC\uAE30."
   type: 1

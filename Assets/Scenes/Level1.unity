@@ -271,9 +271,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 979ce3955617a0a479c45bf5ce100127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cell:
-    key: 
-    state: 0
   data: {fileID: 11400000, guid: 0a4a990cdc1aaf547b4d84fcfcee67ec, type: 2}
 --- !u!1001 &168042443
 PrefabInstance:
@@ -769,7 +766,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -858,9 +855,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 979ce3955617a0a479c45bf5ce100127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cell:
-    key: 
-    state: 0
   data: {fileID: 11400000, guid: 0a4a990cdc1aaf547b4d84fcfcee67ec, type: 2}
 --- !u!1001 &540893858
 PrefabInstance:
@@ -964,7 +958,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7445840643739158332, guid: de3211f7b0cbc3c4f91050c3297a2914, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.12947226
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7445840643739158332, guid: de3211f7b0cbc3c4f91050c3297a2914, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2075,7 +2069,6 @@ GameObject:
   - component: {fileID: 1489958193}
   - component: {fileID: 1489958192}
   - component: {fileID: 1489958191}
-  - component: {fileID: 1489958194}
   - component: {fileID: 1489958190}
   m_Layer: 5
   m_Name: Canvas
@@ -2169,19 +2162,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1489958194
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1489958189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d9b708c5729ec645822fa868df841d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameOverText: {fileID: 0}
 --- !u!1 &1521622558 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7069972524712740675, guid: 39b2b517061503143912c40acc79637a, type: 3}
@@ -2204,9 +2184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 979ce3955617a0a479c45bf5ce100127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cell:
-    key: 
-    state: 0
   data: {fileID: 11400000, guid: 0a4a990cdc1aaf547b4d84fcfcee67ec, type: 2}
 --- !u!1001 &1545069631
 PrefabInstance:
@@ -2842,9 +2819,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 979ce3955617a0a479c45bf5ce100127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cell:
-    key: 
-    state: 0
   data: {fileID: 11400000, guid: 0341bced0c977644c938779a69d25111, type: 2}
 --- !u!4 &1769868987 stripped
 Transform:

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ItemObject : PuzzleBase, IInteractable
+public class ItemObject : MonoBehaviour, IInteractable
 {
     public ItemData data;
     private Interaction interaction;
@@ -67,10 +67,6 @@ public class ItemObject : PuzzleBase, IInteractable
 
         // 오브젝트를 Y축 기준으로 회전
         transform.rotation = Quaternion.Euler(0f, currentRotation, 0f);
-    }
-    public void InteractSwitch()
-    {
-        SetPuzzleState(!CheckState());
     }
 }
 
