@@ -112,6 +112,11 @@ public class Interaction : MonoBehaviour
             Vector3 holdPosition = transform.position + transform.forward * 0.5f + Vector3.up * 1.0f - transform.right * 0.7f;
             item.transform.position = holdPosition;
 
+            Collider itemCollider = item.GetComponent<Collider>();
+            if (itemCollider != null)
+            {
+                itemCollider.enabled = false;
+            }
             fixedJoint = gameObject.AddComponent<FixedJoint>();
             fixedJoint.connectedBody = rb;
 
@@ -122,14 +127,26 @@ public class Interaction : MonoBehaviour
     {
         if (heldItem != null)
         {
-            Vector3 dropPosition = transform.position + transform.forward * 1.2f + Vector3.up * 0.8f;
+            
+            Vector3 dropPosition = transform.position + transform.forward * 0.1f + Vector3.up * 1.0f;
             heldItem.transform.position = dropPosition;
 
-            if (fixedJoint != null)
+            Collider itemCollider = heldItem.GetComponent<Collider>();
+            Rigidbody itemRb = heldItem.GetComponent<Rigidbody>();
+            
+            if (itemRb != null)
             {
+                // Rigidbody가 있다면 키네마틱 모드 해제
+                itemRb.isKinematic = false;
+                // Collider 활성화
+                itemCollider.enabled = true;
                 Destroy(fixedJoint);
                 fixedJoint = null;
-            }
+
+                // 앞쪽으로 힘을 가함
+                Vector3 throwForce = transform.forward * 30f + Vector3.up * 2f; // 힘의 크기를 조절할 수 있습니다
+                itemRb.AddForce(throwForce, ForceMode.Impulse);
+            } 
 
             OnHoldEvent?.Invoke(false);
         }
