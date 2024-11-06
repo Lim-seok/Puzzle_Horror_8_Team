@@ -22,7 +22,10 @@ public class AudioManager : Singleton<AudioManager>
         Button,
         Beat,
         Hit,
-        Ending
+        Ending,
+        ClearDoor,
+        OpenDoor,
+        CloseDoor,
     }
 
     protected override void Awake()
