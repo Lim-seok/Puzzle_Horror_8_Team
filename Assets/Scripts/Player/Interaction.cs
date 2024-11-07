@@ -109,15 +109,15 @@ public class Interaction : MonoBehaviour
             Vector3 holdPosition = transform.position + transform.forward * 0.5f + Vector3.up * 1.0f - transform.right * 0.7f;
             item.transform.position = holdPosition;
 
-            Collider itemCollider = item.GetComponent<Collider>();
-            if (itemCollider != null)
-            {
-                itemCollider.enabled = false;
-            }
             fixedJoint = gameObject.AddComponent<FixedJoint>();
             fixedJoint.connectedBody = rb;
 
             OnHoldEvent?.Invoke(true);
+            Collider itemCollider = item.GetComponent<Collider>();
+            if (itemCollider != null)
+            {
+                itemCollider.isTrigger = true;
+            }
         }
     }
     public void DropItem()
@@ -136,7 +136,7 @@ public class Interaction : MonoBehaviour
                 // Rigidbody가 있다면 키네마틱 모드 해제
                 itemRb.isKinematic = false;
                 // Collider 활성화
-                itemCollider.enabled = true;
+                itemCollider.isTrigger = false;
                 Destroy(fixedJoint);
                 fixedJoint = null;
 
