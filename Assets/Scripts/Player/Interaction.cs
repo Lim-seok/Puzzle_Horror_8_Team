@@ -124,15 +124,18 @@ public class Interaction : MonoBehaviour
     {
         if (heldItem != null)
         {
-            
-            Vector3 dropPosition = transform.position + transform.forward * 0.1f + Vector3.up * 1.0f;
-            heldItem.transform.position = dropPosition;
+            RaycastHit hit;
+            float raycastDistance = 1.5f;
 
             Collider itemCollider = heldItem.GetComponent<Collider>();
             Rigidbody itemRb = heldItem.GetComponent<Rigidbody>();
-            
-            if (itemRb != null)
+          
+            if (Physics.Raycast(transform.position, transform.forward, out hit,raycastDistance))
             {
+                // 1.2f 앞에 장애물이 탐지됨
+                Vector3 dropPosition = transform.position + transform.forward * 0.1f + transform.up * 1.0f;
+                heldItem.transform.position = dropPosition;
+
                 // Rigidbody가 있다면 키네마틱 모드 해제
                 itemRb.isKinematic = false;
                 // Collider 활성화
@@ -141,10 +144,22 @@ public class Interaction : MonoBehaviour
                 fixedJoint = null;
 
                 // 앞쪽으로 힘을 가함
-                Vector3 throwForce = transform.forward * 30f + Vector3.up * 2f; // 힘의 크기를 조절할 수 있습니다
+                Vector3 throwForce = transform.forward * 25f + transform.up * 10f;
                 itemRb.AddForce(throwForce, ForceMode.Impulse);
-            } 
+            }
+            else
+            {
+                // 1.5f 앞에 장애물이 없음
+                Vector3 dropPosition = transform.position + transform.forward * 1.5f + transform.up * 1.0f;
+                heldItem.transform.position = dropPosition;
 
+                // Rigidbody가 있다면 키네마틱 모드 해제
+                itemRb.isKinematic = false;
+                // Collider 활성화
+                itemCollider.isTrigger = false;
+                Destroy(fixedJoint);
+                fixedJoint = null;
+            }
             OnHoldEvent?.Invoke(false);
         }
         heldItem = null;

@@ -8,8 +8,7 @@ public class ItemObject : PuzzleBase, IInteractable
     public ItemData data;
     private Interaction interaction;
     private float currentRotation = 0f;
-    private const float rotationAmount = 30f;
-
+    public float rotationDuration = 1f;
     private ButtonController buttonController;
 
     void Start()
@@ -54,20 +53,30 @@ public class ItemObject : PuzzleBase, IInteractable
         }       
     }
 
+
     public void RotateObject()
     {
-        // 현재 회전 각도에 30도 추가
-        currentRotation += rotationAmount;
+        StartCoroutine(RotateObjectCoroutine());
+    }
 
-        // 360도를 넘어가면 0으로 리셋
-        if (currentRotation >= 360f)
+    private IEnumerator RotateObjectCoroutine()
+    {
+        Quaternion startRotation = transform.rotation;
+        Quaternion targetRotation = startRotation * Quaternion.Euler(0f, 30f, 0f);
+        float elapsedTime = 0f;
+
+        while (elapsedTime < rotationDuration)
         {
-            currentRotation = 0f;
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / rotationDuration;
+            transform.rotation = Quaternion.Slerp(startRotation, targetRotation, t);
+            yield return null;
         }
 
-        // 오브젝트를 Y축 기준으로 회전
-        transform.rotation = Quaternion.Euler(0f, currentRotation, 0f);
+        // 정확한 최종 위치 설정
+        transform.rotation = targetRotation;
     }
+
     public void InteractSwitch()
     {
         SetPuzzleState(!CheckState());
